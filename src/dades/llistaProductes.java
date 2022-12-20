@@ -17,6 +17,13 @@ public class llistaProductes {
         }
     }
 
+    public String toString(){
+        String text = "";
+        for (int i = 0; i < nProductes; i++){
+            text = text + llistaProd[i]+"\n";
+        }
+        return text;
+    }
     
 
 }
