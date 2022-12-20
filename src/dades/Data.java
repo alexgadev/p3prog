@@ -2,7 +2,11 @@ package dades;
 
 public class Data {
     private int dia, mes, any;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> cd3845556dc6c95ac80037e51314d95159576672
     public Data(int dia, int mes, int any){
         this.dia = dia;
         this.mes = mes;
@@ -16,6 +20,7 @@ public class Data {
     }
 
     public String toString() {
+<<<<<<< HEAD
 		return("dia: "+dia+" mes: "+mes+" any: "+any);
 	}
 
@@ -23,3 +28,9 @@ public class Data {
 		return new Data(dia, mes, any);
 	}
 }
+=======
+        return("DATA => dia "+dia+" mes "+mes+" any "+any);
+    }
+    
+    
+>>>>>>> cd3845556dc6c95ac80037e51314d95159576672
