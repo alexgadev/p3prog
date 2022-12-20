@@ -21,5 +21,7 @@ public class mainProductes {
 
         llistaProd.afegeixProducte(p1);
         System.out.println(llistaProd.toString());
+
+        teclat.close();
     }
 }
