@@ -1,5 +1,4 @@
 package aplicacio;
-
 import dades.Producte;
 import dades.Servei;
 import dades.Usuari;
@@ -22,4 +21,5 @@ public class mainPrueba {
         //System.out.println(llistaUsu.toString()); 
        
     }
+    
 }
