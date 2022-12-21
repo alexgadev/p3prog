@@ -6,7 +6,6 @@ public class Usuari {
     private String correu;
     private String codiPostal;
     private int numeroIntercanvis;
-    private String productesOferits;
 
     
     public Usuari (String alies, String correu, String codiPos){
@@ -14,7 +13,6 @@ public class Usuari {
         this.correu = correu;
         codiPostal = codiPos;
         numeroIntercanvis = 0;
-        productesOferits = null;
     }
 
 
@@ -58,28 +56,17 @@ public class Usuari {
     }
 
 
-    public String getProductesOferits() {
-        return productesOferits;
-    }
-
-
-    public void setProductesOferits(String productesOferits) {
-        this.productesOferits = productesOferits;
-    }
-
-    
     public Usuari copia(){
         Usuari aux;
         aux = new Usuari(alies, correu, codiPostal);
         aux.numeroIntercanvis = 0;
-        aux.productesOferits = null;
         return (aux);
     }
 
     @Override
     public String toString() {
         return "Usuaris [alies=" + alies + ", correu=" + correu + ", codiPostal=" + codiPostal + ", numeroIntercanvis="
-                + numeroIntercanvis + ", productesOferits=" + productesOferits + "]";
+                + numeroIntercanvis + " ]";
     }
 
 }

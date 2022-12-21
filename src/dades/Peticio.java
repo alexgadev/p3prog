@@ -61,7 +61,13 @@ public class Peticio {
         this.oferit = oferit;
     }
 
+    public int getResposta() {
+        return resposta;
+    }
 
+    public void setResposta(int resposta) {
+        resposta = 0;
+    }
     /* 
     public tipus() {
         String t = oferit.getTipusProd();
@@ -73,9 +79,13 @@ public class Peticio {
             Scanner ans = new Scanner(System.in);
             System.out.println("Com valoraries aquest intercanvi com a oferidor de la petició?");
             valoracioOfereix = ans.nextInt();
+            oferit.setIntercanviat(true);
 
             System.out.println("Com valoraries aquest intercanvi com a rebedor de la petició?");
             valoracioRep = ans.nextInt();
+            desitjat.setIntercanviat(true);
+           
+            ans.close();
         }
     }
 

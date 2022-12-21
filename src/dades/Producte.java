@@ -7,15 +7,14 @@ public class Producte {
     private String descripcio;
     private String tipusProd;
     private Data dataOferta;
-    //private String[] dataSplit;
+    private boolean intercanviat;
 
     public Producte(String nom, String desc, String tipus, Data data){
         nomProd = nom;
         descripcio = desc;
         tipusProd = tipus;
-        //dataSplit = data.split("/");
-        //dataOferta = new Data(Integer.parseInt(dataSplit[0]), Integer.parseInt(dataSplit[1]), Integer.parseInt(dataSplit[2]));
         dataOferta = data;
+        intercanviat = false;
     }
 
     public void modificaDescripcio(String desc){
@@ -61,6 +60,14 @@ public class Producte {
 
     public void setDataOferta(Data dataOferta) {
         this.dataOferta = dataOferta;
+    }
+
+    public boolean getIntercanviat() {
+        return intercanviat;
+    }
+
+    public void setIntercanviat(boolean boolea) {
+        intercanviat = boolea;
     }
 
     @Override

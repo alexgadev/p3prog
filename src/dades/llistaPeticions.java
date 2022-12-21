@@ -1,6 +1,7 @@
 package dades;
 
 public class llistaPeticions {
+    
     private int nPeticions;
     private Peticio[] llistaPeticio;
 
@@ -10,6 +11,10 @@ public class llistaPeticions {
         nPeticions = 0;
     }
 
+    public Peticio getIessim(int i) {
+        Peticio aux = llistaPeticio[i].copia();
+        return aux;
+    }
 
     public void afegeixPeticio(Peticio pe){
         if(nPeticions < llistaPeticio.length){

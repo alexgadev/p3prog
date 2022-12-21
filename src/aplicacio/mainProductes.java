@@ -18,8 +18,13 @@ public class mainProductes {
         fecha = new Data(Integer.parseInt(fechaSplit[0]), Integer.parseInt(fechaSplit[1]), Integer.parseInt(fechaSplit[2]));
         
         Producte p1 = new Producte("taula", "vagi be", "be", fecha);
+        Producte p2 = new Producte("poma", "aliment", "be", fecha);
 
         llistaProd.afegeixProducte(p1);
+        llistaProd.afegeixProducte(p2);
+        System.out.println(llistaProd.toString());
+        
+        llistaProd.eliminaProducteFisic(p1);
         System.out.println(llistaProd.toString());
 
         teclat.close();
