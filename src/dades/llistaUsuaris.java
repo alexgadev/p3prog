@@ -1,7 +1,5 @@
 package dades;
 
-import javax.sound.sampled.SourceDataLine;
-
 public class llistaUsuaris {
     private int nUsuaris;
     private Usuari[] llistaUsuaris;
