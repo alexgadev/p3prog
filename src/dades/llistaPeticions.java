@@ -23,6 +23,36 @@ public class llistaPeticions {
         }
     }
 
+    public llistaPeticions mostraPeticionsPendents(){
+        llistaPeticions llistaAux = new llistaPeticions(nPeticions);
+        for (int i = 0; i < nPeticions; i++) {
+            if (llistaPeticio[i].getResposta() == 0) {
+                llistaAux.afegeixPeticio(llistaPeticio[i]);
+            }
+        }
+        return llistaAux;
+    }
+
+    public llistaPeticions mostraPeticionsAcceptades() {
+        llistaPeticions llistaAux = new llistaPeticions(nPeticions);
+        for(int i = 0; i < nPeticions; i++){
+            if(llistaPeticio[i].getResposta() == 1){
+                llistaAux.afegeixPeticio(llistaPeticio[i]);
+            }
+        }
+        return llistaAux;
+    }
+
+    public llistaPeticions mostraPeticionsRefusades() {
+        llistaPeticions llistaAux = new llistaPeticions(nPeticions);
+        for(int i = 0; i < nPeticions; i++){
+            if(llistaPeticio[i].getResposta() == 2){
+                llistaAux.afegeixPeticio(llistaPeticio[i]);
+            }
+        }
+        return llistaAux;
+    }
+    
     public String toString(){
         String text = "";
         for (int i = 0; i < nPeticions; i++){

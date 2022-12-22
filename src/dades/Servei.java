@@ -1,22 +1,20 @@
 package dades;
 
-import java.util.Date;
-
 
 public class Servei extends Producte {
     
-    protected Date dataFiOferiment;
+    protected Data dataFiOferiment;
 
     public Servei(){
         super(null, null, null, null);
         dataFiOferiment = null;
     }
 
-    public Date getDataFiOferiment() {
+    public Data getDataFiOferiment() {
         return dataFiOferiment;
     }
 
-    public void setDataFiOferiment(Date dataFiOferiment) {
+    public void setDataFiOferiment(Data dataFiOferiment) {
         this.dataFiOferiment = dataFiOferiment;
     }
 

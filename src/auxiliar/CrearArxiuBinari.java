@@ -1,4 +1,4 @@
-package auxiliar;
+xpackage auxiliar;
 import java.io.*;
 import java.util.Scanner;
 

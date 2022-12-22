@@ -68,6 +68,7 @@ public class mainAplicacio {
         fitPeticions.close();
     }
 
+    /*
     public static void llegirUsuaris() throws IOException {
         BufferedReader fitxerBinari = new BufferedReader(new FileReader("Usuaris.bin"));
         boolean llegit = false;
@@ -78,6 +79,5 @@ public class mainAplicacio {
             frase = fitxerBinari.readLine();
             fraseSplit = frase.split(";");
         }
-    }
-
+    } */
 }
