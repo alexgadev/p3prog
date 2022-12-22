@@ -28,7 +28,7 @@ public class llistaProductes {
         System.out.println("Introdueix la data d'oferta: [dd/mm/aaaa]");
         String dataOferta = teclat.nextLine();
         teclat.close();
-        
+
         String[] dataSplit = dataOferta.split("/");
         Data dataProducte = new Data(Integer.parseInt(dataSplit[0]), Integer.parseInt(dataSplit[1]), Integer.parseInt(dataSplit[2]));
         
