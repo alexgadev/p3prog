@@ -58,11 +58,39 @@ public class llistaProductes {
         Data dataFiServei = new Data(Integer.parseInt(dataSplit[0]), Integer.parseInt(dataSplit[1]), Integer.parseInt(dataSplit[2]));
         
         for(int i = 0; i < nProductes; i++){
-            if (llistaProd[i].getTipusProd().equals("servei") && llistaProd[i].getDataOferta().equals(dataFiServei) 
+            if (llistaProd[i].getTipusProd().equalsIgnoreCase("servei") && llistaProd[i].getDataOferta().equals(dataFiServei) 
                 && llistaProd[i].getNomProd().equals(nom) && llistaProd[i].getDescripcio().equals(desc)){
                 ((Servei)llistaProd[i]).dataFiOferiment = dataFiServei;
             }
         }
+    }
+
+    public void afegeixProducteFisic(Producte prod) {
+        if ((nProductes < llistaProd.length) && (prod.getTipusProd().equalsIgnoreCase("be"))) {
+            llistaProd[nProductes] = prod.copia();
+            nProductes++;
+        }
+    }
+
+    public void afegeixProducteServei(Producte prod) {
+        if ((nProductes < llistaProd.length) && (prod.getTipusProd().equalsIgnoreCase("servei"))) {
+            llistaProd[nProductes] = prod.copia();
+            nProductes++;
+        }
+    }
+    
+    public Producte serveiMesIntercanvis() {
+        Producte serveiMes = new Servei();
+        for(int i = 0; i < nProductes; i++) {
+            if(llistaProd[i].getTipusProd().equalsIgnoreCase("servei")) {
+            /* 
+                if(llistaProd[i].( fer un comptador pels serveis per a saber quin s ha intercanviat mes )) {
+                    serveiMes = llistaProd[i];
+                }
+                */
+            }
+        }
+        return serveiMes;
     }
 
     public String toString() {
