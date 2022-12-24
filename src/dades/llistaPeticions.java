@@ -1,5 +1,7 @@
 package dades;
 
+import java.util.Scanner;
+
 public class llistaPeticions {
     
     private int nPeticions;
@@ -51,6 +53,23 @@ public class llistaPeticions {
             }
         }
         return llistaAux;
+    }
+
+    public void respostaPeticio(Peticio pet, Producte serv){
+        Scanner teclat = new Scanner(System.in);
+        int val;
+
+        if(pet.getResposta() == 1){
+            serv.comptadorInter++;
+            System.out.println("Introdueix la valoració del venedor: ");
+            val = teclat.nextInt();
+            pet.setValoracioOfereix(val);
+            
+            System.out.println("Introdueix la valoració del comprador: ");
+            val = teclat.nextInt();
+            pet.setValoracioRep(val);
+            teclat.close();
+        } 
     }
     
     public String toString(){

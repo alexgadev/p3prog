@@ -100,4 +100,36 @@ public class Peticio {
         return "Peticio [codi=" + codi + ", usuariOfereix=" + usuariOfereix + ", usuariRep=" + usuariRep + ", desitjat="
                 + desitjat + ", oferit=" + oferit + ", resposta=" + resposta + "]";
     }
+
+    public String getCodi() {
+        return codi;
+    }
+
+    public Producte getDesitjat() {
+        return desitjat;
+    }
+
+    public void setDesitjat(Producte desitjat) {
+        this.desitjat = desitjat;
+    }
+
+    public void setOferit(Producte oferit) {
+        this.oferit = oferit;
+    }
+
+    public int getValoracioOfereix() {
+        return valoracioOfereix;
+    }
+
+    public void setValoracioOfereix(int valoracioOfereix) {
+        this.valoracioOfereix = valoracioOfereix;
+    }
+
+    public int getValoracioRep() {
+        return valoracioRep;
+    }
+
+    public void setValoracioRep(int valoracioRep) {
+        this.valoracioRep = valoracioRep;
+    }
 }

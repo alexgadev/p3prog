@@ -8,6 +8,7 @@ public class Producte {
     private String tipusProd;
     private Data dataOferta;
     private boolean intercanviat;
+    protected int comptadorInter;
 
     public Producte(String nom, String desc, String tipus, Data data){
         nomProd = nom;
@@ -15,6 +16,7 @@ public class Producte {
         tipusProd = tipus;
         dataOferta = data;
         intercanviat = false;
+        comptadorInter = 0;
     }
 
     public void modificaDescripcio(String desc){
@@ -68,6 +70,13 @@ public class Producte {
 
     public void setIntercanviat(boolean boolea) {
         intercanviat = boolea;
+    }
+    public int getComptadorInter() {
+        return comptadorInter;
+    }
+
+    public void setComptadorInter(int comptadorInter) {
+        this.comptadorInter = comptadorInter;
     }
 
     @Override

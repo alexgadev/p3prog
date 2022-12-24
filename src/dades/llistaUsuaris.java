@@ -40,12 +40,12 @@ public class llistaUsuaris {
         return igual;
     }
 
-    public llistaUsuaris valoracioUsuaris(int llindar){
+    public llistaUsuaris valoracioUsuaris(int llindar, Peticio pet){
         llistaUsuaris llistaAux = new llistaUsuaris(nUsuaris);
         for(int i = 0; i < nUsuaris; i++){
-           /* if (valoracio >= llindar){
+           if (pet.getValoracioOfereix() >= llindar){
                 llistaAux.afegeixUsuari(llistaUsuaris[i]);
-            } */
+            } 
         }
         return llistaAux;
     }

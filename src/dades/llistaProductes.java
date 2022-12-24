@@ -80,14 +80,18 @@ public class llistaProductes {
     }
     
     public Producte serveiMesIntercanvis() {
-        Producte serveiMes = new Servei();
+        Producte serveiMes = new Producte(null, null, null, null);
+        //llistaProductes llistaAux = new llistaProductes(nProductes);
+        
+        int j = 0;
         for(int i = 0; i < nProductes; i++) {
-            if(llistaProd[i].getTipusProd().equalsIgnoreCase("servei")) {
-            /* 
-                if(llistaProd[i].( fer un comptador pels serveis per a saber quin s ha intercanviat mes )) {
-                    serveiMes = llistaProd[i];
+            if(llistaProd[i].getTipusProd().equalsIgnoreCase("servei")) { 
+                while( !(llistaProd[j+1].getTipusProd().equalsIgnoreCase("servei"))) {
+                    j++;
                 }
-                */
+                if(llistaProd[j].getComptadorInter() < llistaProd[i].getComptadorInter()) {
+                    serveiMes = llistaProd[j].copia();
+                }
             }
         }
         return serveiMes;
