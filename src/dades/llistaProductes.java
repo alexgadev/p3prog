@@ -91,6 +91,8 @@ public class llistaProductes {
                 }
                 if(llistaProd[j].getComptadorInter() < llistaProd[i].getComptadorInter()) {
                     serveiMes = llistaProd[j].copia();
+                    i = j;
+                    j++;
                 }
             }
         }
