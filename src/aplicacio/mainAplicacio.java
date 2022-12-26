@@ -12,12 +12,10 @@ public class mainAplicacio {
         boolean finalFitxer = false;
         // BufferedReader fitUsuaris = new BufferedReader(newFileReader("Usuaris.txt"));
         
-        llistaUsuaris llistaUsu = new llistaUsuaris(MAX);
-
         try {
             llegirPeticions();
             llegirProductes();
-            // llegirUsuaris();
+            llegirUsuaris();
 
         } catch (EOFException e) {
             System.out.println("[+] No hi ha més dades a llegir... " + e);
@@ -30,6 +28,7 @@ public class mainAplicacio {
         Scanner teclat = new Scanner(System.in);
 
         System.out.println("Benvinguts a l'aplicació d'intercanvis");
+        System.out.print("Elegeix la opció que vols: ");
         System.out.println("[1] Carregar les dades dels fitxers");
         System.out.println("[2] Llistar les dades de qualsevol llista que tingueu definida");
         System.out.println("[3] Llistar les ofertes de serveis que estan actives");
@@ -47,7 +46,7 @@ public class mainAplicacio {
         System.out.println("[15] Mostrar els usuaris que tenen valoracions en els seus intercanvis superiors a un llindar que indiqui l’usuari");
         System.out.println("[16] Mostrar el servei del qual s’han fet més intercanvis i indicar el número d’aquests");
         System.out.println("[17] Sortir de l’aplicació");
-        System.out.print("Elegeix la opció que vols: ");
+        
         int opcio = teclat.nextInt();
         teclat.close();
 
@@ -107,19 +106,22 @@ public class mainAplicacio {
     }
 
     public static void llegirProductes() throws IOException {
-        BufferedReader fitProductes = new BufferedReader(new FileReader("Usuaris.txt"));
+        BufferedReader fitProductes = new BufferedReader(new FileReader("Productes.txt"));
         boolean finalFitxer = false;
         String frase = "";
         String[] fraseSplit;
         llistaProductes llistaProd = new llistaProductes(MAX);
-
-        while (!finalFitxer) {
-            frase = fitProductes.readLine();
-            fraseSplit = frase.split(";");
-            String[] splitData = fraseSplit[3].split("/");
-            Data data = new Data(Integer.parseInt(splitData[0]), Integer.parseInt(splitData[1]), Integer.parseInt(splitData[2]));
-            Producte prod = new Producte(fraseSplit[0], fraseSplit[1], fraseSplit[2], data);
-            llistaProd.afegeixProducte(prod);
+        try{
+            while (!finalFitxer) {
+                frase = fitProductes.readLine();
+                fraseSplit = frase.split(";");
+                String[] splitData = fraseSplit[3].split("/");
+                Data data = new Data(Integer.parseInt(splitData[0]), Integer.parseInt(splitData[1]), Integer.parseInt(splitData[2]));
+                Producte prod = new Producte(fraseSplit[0], fraseSplit[1], fraseSplit[2], data);
+                llistaProd.afegeixProducte(prod);
+            }
+        } catch (EOFException e) {
+            finalFitxer = true;
         }
         fitProductes.close();
     }
@@ -128,35 +130,52 @@ public class mainAplicacio {
         BufferedReader fitPeticions = new BufferedReader(new FileReader("Peticions.txt"));
         String frase = "";
         String[] fraseSplit;
+        String[] fraseSplitData;
         boolean finalFitxer = false;
         llistaPeticions llistaPet = new llistaPeticions(MAX);
         
-        while (!finalFitxer) {
-            frase = fitPeticions.readLine();
-            fraseSplit = frase.split(";");
-            Usuari userOf = new Usuari(fraseSplit[1], fraseSplit[2], fraseSplit[3]);
-            Usuari userRep = new Usuari(fraseSplit[5], fraseSplit[6], fraseSplit[7]);
+        try{
+            while (!finalFitxer) {
+                frase = fitPeticions.readLine();
+                fraseSplit = frase.split(";");
 
+                Usuari userOf = new Usuari(fraseSplit[1], fraseSplit[2], fraseSplit[3]);
+                Usuari userRep = new Usuari(fraseSplit[5], fraseSplit[6], fraseSplit[7]);
+
+                Data dataProd = new Data(MAX, MAX, MAX);
+
+                Producte prodDes = new Producte(fraseSplit[8], fraseSplit[9], fraseSplit[10], null);
+                Producte prodOf = new Producte(fraseSplit[11], frase, frase, null);
     
-
-            //Peticio peticio = new Peticio(fraseSplit[0], userOf, userRep, );
-            //peticio.setNumeroIntercanvis(Integer.parseInt(fraseSplit[3]));
+        
+                //Peticio peticio = new Peticio(fraseSplit[0], userOf, userRep, );
+                //peticio.setNumeroIntercanvis(Integer.parseInt(fraseSplit[4]));
+            }
+        } catch (EOFException e){
+            finalFitxer = true;
         }
         fitPeticions.close();
     }
 
-    
     public static void llegirUsuaris() throws IOException {
-        BufferedReader fitxerBinari = new BufferedReader(new FileReader("Usuaris.bin"));
-        boolean llegit = false;
+        ObjectInputStream fitxerBinari = new ObjectInputStream(new FileInputStream("Usuaris.bin"));
+        boolean finalFitxer = false;
         String frase = "";
         String[] fraseSplit;
+        llistaUsuaris llistaUsu = new llistaUsuaris(MAX);
         
-        while(!llegit) {
-            frase = fitxerBinari.readLine();
-            fraseSplit = frase.split(";");
+        try {
+            while(!finalFitxer) {
+                //frase = fitxerBinari.readObject();
+                fraseSplit = frase.split(";");
+                Usuari usu = new Usuari(fraseSplit[0], fraseSplit[1], fraseSplit[2]);
+                usu.setNumeroIntercanvis(0);
+                llistaUsu.afegeixUsuari(usu);
+            }
+        } catch (EOFException e){
+            finalFitxer = true;
         }
+        fitxerBinari.close();
     } 
-
 
 }

@@ -1,5 +1,9 @@
 package dades;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
 public class llistaUsuaris {
     private int nUsuaris;
     private Usuari[] llistaUsuaris;
@@ -56,6 +60,19 @@ public class llistaUsuaris {
             text = text + llistaUsuaris[i]+"\n";
         }
         return text;
+    }
+
+    public static void storeData(Usuari[] llistaUsuaris){
+        ObjectOutputStream outputFile;
+        try{
+            outputFile = new ObjectOutputStream(new FileOutputStream("usuaris.bin"));
+            for (int i = 0; i < llistaUsuaris.length; i++){
+                outputFile.writeObject(llistaUsuaris[i]);
+            }
+            outputFile.close();
+        } catch (IOException e){
+            System.out.println("Error en l'arxiu de sortida!");
+        }
     }
 
     
