@@ -11,7 +11,98 @@ public class mainAplicacio {
     public static void main(String[] args) throws FileNotFoundException, EOFException, IOException {
         boolean finalFitxer = false;
         // BufferedReader fitUsuaris = new BufferedReader(newFileReader("Usuaris.txt"));
+        Scanner teclat = new Scanner(System.in);
+        llistaUsuaris llistaUsu = new llistaUsuaris(MAX);
+        llistaProductes llistaProd = new llistaProductes(MAX);
+        llistaPeticions llistaPet = new llistaPeticions(MAX);
+        iniciarSesio();
+
+        mostraOpcions();
+        int opcio = teclat.nextInt();
+        teclat.close();
         
+        
+        switch(opcio) {
+            case 1:
+            llegirFitxers();
+            break;
+
+            case 2: 
+            llistaUsu.toString();
+            System.out.println();
+            llistaProd.toString();
+            System.out.println();
+            llistaPet.toString();
+            break;
+
+            case 3: 
+            System.out.println(llistaProd.serveisActius()); 
+            break;
+
+            case 4: 
+            System.out.println(llistaProd.bensActius());
+            break;
+
+            case 5:
+            Scanner servei = new Scanner(System.in);
+            System.out.println("Introdueix el nom del servei: ");
+            servei.nextLine();
+            System.out.println("");
+            llistaProd.afegeixProducteServei(null);
+            break;
+
+            case 6: 
+            
+            break;
+
+            case 7: 
+            
+            break;
+
+            case 8: 
+            
+            break;
+
+            case 9: 
+            
+            break;
+
+            case 10: 
+            
+            break;
+
+            case 11: 
+            
+            break;
+
+            case 12: 
+            
+            break;
+
+            case 13: 
+            
+            break;
+
+            case 14: 
+            
+            break;
+
+            case 15: 
+            
+            break;
+
+            case 16: 
+            
+            break;
+            
+            case 17: 
+            
+            break;
+        }
+    }
+
+    private static void llegirFitxers() {
+        boolean finalFitxer = false;
         try {
             llegirPeticions();
             llegirProductes();
@@ -25,7 +116,43 @@ public class mainAplicacio {
         } catch (IOException e) {
             System.out.println(e);
         }
-        Scanner teclat = new Scanner(System.in);
+
+    }
+
+    private static void iniciarSesio() {
+        Scanner resposta = new Scanner(System.in);
+        int valor;
+        String frase;
+        Usuari user = new Usuari(null, null, null);
+        llistaUsuaris llistaUsers = new llistaUsuaris(100);
+
+        System.out.println("Tria una opció: ");
+        System.out.println("[1]: REGISTRAR UN NOU USUARI");
+        System.out.println("[2]: INICIAR SESSIÓ");
+        valor = resposta.nextInt();
+        
+        if (valor == 1){
+            System.out.println("Introdueix l'alies: ");
+            frase = resposta.nextLine();
+            
+            user.setAlies(frase);
+            System.out.println("Introduexi el correu: ");
+            frase = resposta.nextLine();
+            user.setCorreu(frase);
+            System.out.println("Introduexi el codi postal: ");
+            frase = resposta.nextLine();
+            user.setCodiPostal(frase);
+            
+        }
+        else if (valor == 2) {
+            System.out.println("Introdueix l'alies de l'usuari: ");
+            frase = resposta.nextLine();
+            
+        }
+        resposta.close();
+    }
+
+	private static void mostraOpcions() {
 
         System.out.println("Benvinguts a l'aplicació d'intercanvis");
         System.out.print("Elegeix la opció que vols: ");
@@ -46,63 +173,6 @@ public class mainAplicacio {
         System.out.println("[15] Mostrar els usuaris que tenen valoracions en els seus intercanvis superiors a un llindar que indiqui l’usuari");
         System.out.println("[16] Mostrar el servei del qual s’han fet més intercanvis i indicar el número d’aquests");
         System.out.println("[17] Sortir de l’aplicació");
-        
-        int opcio = teclat.nextInt();
-        teclat.close();
-
-        switch(opcio) {
-            case 1:
-
-            break;
-            case 2: 
-            
-            break;
-            case 3: 
-            
-            break;
-            case 4: 
-            
-            break;
-            case 5: 
-            
-            break;
-            case 6: 
-            
-            break;
-            case 7: 
-            
-            break;
-            case 8: 
-            
-            break;
-            case 9: 
-            
-            break;
-            case 10: 
-            
-            break;
-            case 11: 
-            
-            break;
-            case 12: 
-            
-            break;
-            case 13: 
-            
-            break;
-            case 14: 
-            
-            break;
-            case 15: 
-            
-            break;
-            case 16: 
-            
-            break;
-            case 17: 
-            
-            break;
-        }
     }
 
     public static void llegirProductes() throws IOException {
@@ -142,13 +212,16 @@ public class mainAplicacio {
                 Usuari userOf = new Usuari(fraseSplit[1], fraseSplit[2], fraseSplit[3]);
                 Usuari userRep = new Usuari(fraseSplit[5], fraseSplit[6], fraseSplit[7]);
 
-                Data dataProd = new Data(MAX, MAX, MAX);
-
-                Producte prodDes = new Producte(fraseSplit[8], fraseSplit[9], fraseSplit[10], null);
-                Producte prodOf = new Producte(fraseSplit[11], frase, frase, null);
+                fraseSplitData = fraseSplit[11].split("/");
+                Data dataProd = new Data(Integer.parseInt(fraseSplitData[0]), Integer.parseInt(fraseSplitData[1]), Integer.parseInt(fraseSplitData[2]));
+                Producte prodDes = new Producte(fraseSplit[8], fraseSplit[9], fraseSplit[10], dataProd);
+                
+                fraseSplitData = fraseSplit[14].split("/");
+                dataProd = new Data(Integer.parseInt(fraseSplitData[0]), Integer.parseInt(fraseSplitData[1]), Integer.parseInt(fraseSplitData[2]));
+                Producte prodOf = new Producte(fraseSplit[11], fraseSplit[12], fraseSplit[13], dataProd);
     
-        
-                //Peticio peticio = new Peticio(fraseSplit[0], userOf, userRep, );
+                Peticio peticio = new Peticio(fraseSplit[0], userOf, userRep, prodDes, prodOf);
+                llistaPet.afegeixPeticio(peticio);
                 //peticio.setNumeroIntercanvis(Integer.parseInt(fraseSplit[4]));
             }
         } catch (EOFException e){
@@ -163,7 +236,7 @@ public class mainAplicacio {
         String frase = "";
         String[] fraseSplit;
         llistaUsuaris llistaUsu = new llistaUsuaris(MAX);
-        
+        /*
         try {
             while(!finalFitxer) {
                 //frase = fitxerBinari.readObject();
@@ -175,7 +248,7 @@ public class mainAplicacio {
         } catch (EOFException e){
             finalFitxer = true;
         }
-        fitxerBinari.close();
+        fitxerBinari.close(); */
     } 
 
 }

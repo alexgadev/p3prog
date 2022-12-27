@@ -107,4 +107,24 @@ public class llistaProductes {
         return text;
     }
 
+    public llistaProductes serveisActius(){
+        llistaProductes aux = new llistaProductes(nProductes);
+        for(int i = 0; i<nProductes; i++){
+            if(llistaProd[i].getTipusProd().equalsIgnoreCase("servei") && ((Servei)llistaProd[i]).dataFiOferiment == null){
+                aux.afegeixProducte(llistaProd[i]);
+            }
+        }
+        return aux;
+    }
+
+
+    public llistaProductes bensActius() {
+        llistaProductes aux = new llistaProductes(nProductes);
+        for(int i = 0; i < nProductes; i++) {
+            if(llistaProd[i].getTipusProd().equalsIgnoreCase("be")) {
+                aux.afegeixProducte(llistaProd[i]);
+            }
+        }
+        return aux;
+    }
 }

@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class CrearArxiuBinari {
     
-    public static void main(String[] args) throws IOException {
+    public CrearArxiuBinari () throws IOException {
         Scanner fit = new Scanner(new File("Usuaris.txt"));
         ObjectOutputStream fitxerBinari = new ObjectOutputStream(new FileOutputStream("Usuaris.bin"));
         String frase;

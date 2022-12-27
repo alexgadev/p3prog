@@ -13,7 +13,7 @@ public class llistaUsuaris {
         llistaUsuaris = new Usuari[mesura];
     }
 
-    public void afegeixUsuari(Usuari usuari){
+    public void registraUsuari(Usuari usuari){
         if(nUsuaris == 0){
             llistaUsuaris[nUsuaris] = usuari.copia();
             nUsuaris++;
@@ -48,7 +48,7 @@ public class llistaUsuaris {
         llistaUsuaris llistaAux = new llistaUsuaris(nUsuaris);
         for(int i = 0; i < nUsuaris; i++){
            if (pet.getValoracioOfereix() >= llindar){
-                llistaAux.afegeixUsuari(llistaUsuaris[i]);
+                llistaAux.registraUsuari(llistaUsuaris[i]);
             } 
         }
         return llistaAux;
