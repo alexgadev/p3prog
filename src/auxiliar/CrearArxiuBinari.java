@@ -2,21 +2,17 @@ package auxiliar;
 import java.io.*;
 import java.util.Scanner;
 
+import dades.llistaUsuaris;
+
 public class CrearArxiuBinari {
     
-    public CrearArxiuBinari () throws IOException {
-        Scanner fit = new Scanner(new File("Usuaris.txt"));
+    public void CreaArxiuBinari(llistaUsuaris llistaUsers) throws IOException {
         ObjectOutputStream fitxerBinari = new ObjectOutputStream(new FileOutputStream("Usuaris.bin"));
-        String frase;
 
-        while (fit.hasNextLine()) {
-            frase = fit.nextLine();
-            System.out.println("Linia llegida! "+frase);
-
-            fitxerBinari.writeObject(frase); //Escrivim el contingut del fitxer mentre no sigui final
+        for(int i = 0; i < llistaUsers.getnUsuaris(); i++){
+           fitxerBinari.writeObject(llistaUsers.getIessim(i)); 
         }
-        System.out.println("Fitxer generat!");
-        fit.close();
         fitxerBinari.close();
     }
+        
 }

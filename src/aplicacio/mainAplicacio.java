@@ -3,25 +3,27 @@ package aplicacio;
 import java.io.*;
 import java.util.Scanner;
 
+import auxiliar.CrearArxiuBinari;
+import auxiliar.carregarUsuaris;
 import dades.*;
 
 public class mainAplicacio {
     static final int MAX = 0;
+    static Scanner teclat = new Scanner(System.in);
 
     public static void main(String[] args) throws FileNotFoundException, EOFException, IOException {
         boolean finalFitxer = false;
         // BufferedReader fitUsuaris = new BufferedReader(newFileReader("Usuaris.txt"));
-        Scanner teclat = new Scanner(System.in);
+        
         llistaUsuaris llistaUsu = new llistaUsuaris(MAX);
         llistaProductes llistaProd = new llistaProductes(MAX);
         llistaPeticions llistaPet = new llistaPeticions(MAX);
         iniciarSesio();
 
-        mostraOpcions();
-        int opcio = teclat.nextInt();
-        teclat.close();
+        //mostraOpcions();
+        //int opcio = teclat.nextInt();
         
-        
+        /* 
         switch(opcio) {
             case 1:
             llegirFitxers();
@@ -99,7 +101,9 @@ public class mainAplicacio {
             
             break;
         }
-    }
+        teclat.close();
+    */
+    } 
 
     private static void llegirFitxers() {
         boolean finalFitxer = false;
@@ -119,12 +123,14 @@ public class mainAplicacio {
 
     }
 
-    private static void iniciarSesio() {
+    private static void iniciarSesio () throws IOException {
         Scanner resposta = new Scanner(System.in);
         int valor;
-        String frase;
         Usuari user = new Usuari(null, null, null);
         llistaUsuaris llistaUsers = new llistaUsuaris(100);
+        carregarUsuaris carregarUsu = new carregarUsuaris();
+        CrearArxiuBinari arxiuBin = new CrearArxiuBinari();
+       
 
         System.out.println("Tria una opció: ");
         System.out.println("[1]: REGISTRAR UN NOU USUARI");
@@ -133,20 +139,31 @@ public class mainAplicacio {
         
         if (valor == 1){
             System.out.println("Introdueix l'alies: ");
-            frase = resposta.nextLine();
+            String alies = teclat.nextLine();
+            System.out.println("Introdueix el correu: ");
+            String correu = teclat.nextLine();
+            System.out.println("Introdueix el codi postal: ");
+            String codiPos = teclat.nextLine();
             
-            user.setAlies(frase);
-            System.out.println("Introduexi el correu: ");
-            frase = resposta.nextLine();
-            user.setCorreu(frase);
-            System.out.println("Introduexi el codi postal: ");
-            frase = resposta.nextLine();
-            user.setCodiPostal(frase);
-            
+            user = new Usuari(alies, correu, codiPos);
+            llistaUsers = carregarUsu.carregarUsu();    //Carreguem els usuaris en una llista
+
+            if(llistaUsers.getnUsuaris() == 0){
+                llistaUsers.afegirUsuari(user);
+                arxiuBin.CreaArxiuBinari(llistaUsers);
+
+            } else {
+                if(!llistaUsers.comprovaIgualtats(user)){
+                    llistaUsers.afegirUsuari(user);
+                    arxiuBin.CreaArxiuBinari(llistaUsers);
+                }
+            }
+            System.out.println(llistaUsers.toString()); 
+              
         }
         else if (valor == 2) {
             System.out.println("Introdueix l'alies de l'usuari: ");
-            frase = resposta.nextLine();
+            String alies = resposta.nextLine();
             
         }
         resposta.close();

@@ -1,6 +1,8 @@
 package dades;
 
-public class Usuari {
+import java.io.Serializable;
+
+public class Usuari implements Serializable {
     
     private String alies;
     private String correu;

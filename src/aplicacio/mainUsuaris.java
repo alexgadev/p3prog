@@ -11,9 +11,9 @@ public class mainUsuaris {
         Usuari u2 = new Usuari("tomasTurbao", "foimbap@gmai.com", "34562");
         Usuari u3 = new Usuari("CryptoBro", "cryptobro@penemail.com", "35372");
 
-        llistaUsu.registraUsuari(u1);
-        llistaUsu.registraUsuari(u2);
-        llistaUsu.registraUsuari(u3);
+        llistaUsu.afegirUsuari(u1);
+        llistaUsu.afegirUsuari(u2);
+        llistaUsu.afegirUsuari(u3);
         
         System.out.println(llistaUsu.toString()); 
        
