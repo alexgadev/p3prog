@@ -30,11 +30,11 @@ public class mainAplicacio {
             break;
 
             case 2: 
-            llistaUsu.toString();
-            System.out.println();
-            llistaProd.toString();
-            System.out.println();
-            llistaPet.toString();
+            System.out.println(llistaUsu.toString()+"\n"); 
+            
+            System.out.println(llistaProd.toString()+"\n");    
+            
+            System.out.println(llistaPet.toString()+"\n"); 
             break;
 
             case 3: 
@@ -119,6 +119,8 @@ public class mainAplicacio {
             System.out.println("Fitxer incorrecte" + e);
         } catch (IOException e) {
             System.out.println(e);
+        } catch (ClassNotFoundException e){
+            System.err.println(e);
         }
 
     }
@@ -247,25 +249,23 @@ public class mainAplicacio {
         fitPeticions.close();
     }
 
-    public static void llegirUsuaris() throws IOException {
+    public static void llegirUsuaris() throws IOException, ClassNotFoundException {
         ObjectInputStream fitxerBinari = new ObjectInputStream(new FileInputStream("Usuaris.bin"));
         boolean finalFitxer = false;
-        String frase = "";
-        String[] fraseSplit;
         llistaUsuaris llistaUsu = new llistaUsuaris(MAX);
-        /*
+        Usuari usu;
+        
         try {
             while(!finalFitxer) {
-                //frase = fitxerBinari.readObject();
-                fraseSplit = frase.split(";");
-                Usuari usu = new Usuari(fraseSplit[0], fraseSplit[1], fraseSplit[2]);
-                usu.setNumeroIntercanvis(0);
-                llistaUsu.afegeixUsuari(usu);
+                usu = (Usuari) fitxerBinari.readObject();
+                llistaUsu.afegirUsuari(usu);
             }
         } catch (EOFException e){
             finalFitxer = true;
+        } catch (ClassNotFoundException e){
+            System.err.println(e);
         }
-        fitxerBinari.close(); */
+        fitxerBinari.close(); 
     } 
 
 }

@@ -1,6 +1,5 @@
 package auxiliar;
 import java.io.*;
-import java.util.Scanner;
 
 import dades.llistaUsuaris;
 

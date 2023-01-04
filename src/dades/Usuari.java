@@ -8,13 +8,14 @@ public class Usuari implements Serializable {
     private String correu;
     private String codiPostal;
     private int numeroIntercanvis;
-
+    private llistaProductes llistaProd;  
     
     public Usuari (String alies, String correu, String codiPos){
         this.alies = alies;
         this.correu = correu;
         codiPostal = codiPos;
         numeroIntercanvis = 0;
+        llistaProd = new llistaProductes(100);  //Llista de productes per guardar els de cada usuari
     }
 
 

@@ -19,6 +19,8 @@ public class Peticio {
         this.desitjat = desitjat;
         this.oferit = oferit;
         resposta = 0;
+        valoracioOfereix = 0;
+        valoracioRep = 0;
     }
 
     public String getcodi() {

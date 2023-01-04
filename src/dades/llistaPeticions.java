@@ -79,5 +79,21 @@ public class llistaPeticions {
         }
         return text;
     }
+
+    public int getnPeticions() {
+        return nPeticions;
+    }
+
+    public void setnPeticions(int nPeticions) {
+        this.nPeticions = nPeticions;
+    }
+
+    public Peticio[] getLlistaPeticio() {
+        return llistaPeticio;
+    }
+
+    public void setLlistaPeticio(Peticio[] llistaPeticio) {
+        this.llistaPeticio = llistaPeticio;
+    }
     
 }
