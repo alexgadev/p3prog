@@ -11,15 +11,22 @@ public class llistaProductes {
         llistaProd = new Producte[mida];
         nProductes = 0;
     }
-
-    public void afegeixProducte(Producte prod) {
-        if (nProductes < llistaProd.length) {
-            llistaProd[nProductes] = prod.copia();
+    
+    public void afegeixServei(Producte prod) { 
+        if(nProductes < llistaProd.length) {
+            llistaProd[nProductes] = ((Servei)prod).copia();
+            nProductes++;
+        }
+    }
+    
+    public void afegeixBe(Producte prod){
+        if(nProductes < llistaProd.length){
+            llistaProd[nProductes] = ((Be)prod).copia();
             nProductes++;
         }
     }
 
-    public void eliminaProducteFisic(Producte prod) {
+    public void eliminaProducteFisic(Be b) {
         Scanner teclat = new Scanner(System.in);
         System.out.println("Introdueix el nom del producte: ");
         String nom = teclat.nextLine();
@@ -33,7 +40,7 @@ public class llistaProductes {
         Data dataProducte = new Data(Integer.parseInt(dataSplit[0]), Integer.parseInt(dataSplit[1]), Integer.parseInt(dataSplit[2]));
         
         for (int i = 0; i < nProductes; i++) {
-            if (llistaProd[i].getTipusProd().equalsIgnoreCase("be") && (llistaProd[i].getIntercanviat() == false)
+            if ((llistaProd[i] instanceof Be) && (llistaProd[i].getIntercanviat() == false)
                 && llistaProd[i].getNomProd().equalsIgnoreCase(nom) && llistaProd[i].getDescripcio().equalsIgnoreCase(desc)
                     && llistaProd[i].getDataOferta().equals(dataProducte)) {
                 llistaProd[i] = llistaProd[i+1];
@@ -58,7 +65,7 @@ public class llistaProductes {
         Data dataFiServei = new Data(Integer.parseInt(dataSplit[0]), Integer.parseInt(dataSplit[1]), Integer.parseInt(dataSplit[2]));
         
         for(int i = 0; i < nProductes; i++){
-            if (llistaProd[i].getTipusProd().equalsIgnoreCase("servei") && llistaProd[i].getDataOferta().equals(dataFiServei) 
+            if ((llistaProd[i] instanceof Servei) && llistaProd[i].getDataOferta().equals(dataFiServei) 
                 && llistaProd[i].getNomProd().equals(nom) && llistaProd[i].getDescripcio().equals(desc)){
                 ((Servei)llistaProd[i]).dataFiOferiment = dataFiServei;
             }
@@ -66,31 +73,31 @@ public class llistaProductes {
     }
 
     public void afegeixProducteFisic(Producte prod) {
-        if ((nProductes < llistaProd.length) && (prod.getTipusProd().equalsIgnoreCase("be"))) {
-            llistaProd[nProductes] = prod.copia();
+        if ((nProductes < llistaProd.length) && (prod instanceof Be)) {
+            llistaProd[nProductes] = ((Be)prod).copia();
             nProductes++;
         }
     }
 
     public void afegeixProducteServei(Producte prod) {
-        if ((nProductes < llistaProd.length) && (prod.getTipusProd().equalsIgnoreCase("servei"))) {
-            llistaProd[nProductes] = prod.copia();
+        if ((nProductes < llistaProd.length) && (prod instanceof Servei)) {
+            llistaProd[nProductes] = ((Servei)prod).copia();
             nProductes++;
         }
     }
     
     public Producte serveiMesIntercanvis() {
-        Producte serveiMes = new Producte(null, null, null, null);
-        //llistaProductes llistaAux = new llistaProductes(nProductes);
+        Servei serveiMes = new Servei(null, null, null);
+
         
         int j = 0;
         for(int i = 0; i < nProductes; i++) {
-            if(llistaProd[i].getTipusProd().equalsIgnoreCase("servei")) { 
-                while( !(llistaProd[j+1].getTipusProd().equalsIgnoreCase("servei"))) {
+            if(llistaProd[i] instanceof Servei) { 
+                while( !(llistaProd[j+1] instanceof Servei)) {
                     j++;
                 }
                 if(llistaProd[j].getComptadorInter() < llistaProd[i].getComptadorInter()) {
-                    serveiMes = llistaProd[j].copia();
+                    serveiMes = ((Servei)llistaProd[j]).copia();
                     i = j;
                     j++;
                 }
@@ -110,8 +117,8 @@ public class llistaProductes {
     public llistaProductes serveisActius(){
         llistaProductes aux = new llistaProductes(nProductes);
         for(int i = 0; i<nProductes; i++){
-            if(llistaProd[i].getTipusProd().equalsIgnoreCase("servei") && ((Servei)llistaProd[i]).dataFiOferiment == null){
-                aux.afegeixProducte(llistaProd[i]);
+            if((llistaProd[i] instanceof Servei) && ((Servei)llistaProd[i]).dataFiOferiment == null){
+                aux.afegeixServei(llistaProd[i]);
             }
         }
         return aux;
@@ -121,10 +128,27 @@ public class llistaProductes {
     public llistaProductes bensActius() {
         llistaProductes aux = new llistaProductes(nProductes);
         for(int i = 0; i < nProductes; i++) {
-            if(llistaProd[i].getTipusProd().equalsIgnoreCase("be")) {
-                aux.afegeixProducte(llistaProd[i]);
+            if(llistaProd[i] instanceof Be) {
+                aux.afegeixBe(llistaProd[i]);
             }
         }
         return aux;
     }
+
+    public int getnProductes() {
+        return nProductes;
+    }
+
+    public void setnProductes(int nProductes) {
+        this.nProductes = nProductes;
+    }
+
+    public Producte[] getLlistaProd() {
+        return llistaProd;
+    }
+
+    public void setLlistaProd(Producte[] llistaProd) {
+        this.llistaProd = llistaProd;
+    }
+    
 }

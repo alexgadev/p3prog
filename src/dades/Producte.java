@@ -1,19 +1,17 @@
 package dades;
 
 
-public class Producte {
+public abstract class Producte {
     
     private String nomProd;
-    private String descripcio;
-    private String tipusProd;
+    private String descripcio;;
     private Data dataOferta;
     private boolean intercanviat;
     protected int comptadorInter;
 
-    public Producte(String nom, String desc, String tipus, Data data){
+    public Producte(String nom, String desc, Data data){
         nomProd = nom;
         descripcio = desc;
-        tipusProd = tipus;
         dataOferta = data;
         intercanviat = false;
         comptadorInter = 0;
@@ -27,10 +25,11 @@ public class Producte {
         }
     }
     
+    /*
     public Producte copia(){
-        Producte aux = new Producte(nomProd, descripcio, tipusProd, dataOferta);
+        Producte aux = new Producte(nomProd, descripcio, dataOferta);
         return aux;
-    } 
+    } */
 
     public String getNomProd() {
         return nomProd;
@@ -48,13 +47,6 @@ public class Producte {
         this.descripcio = descripcio;
     }
 
-    public String getTipusProd() {
-        return tipusProd;
-    }
-
-    public void setTipusProd(String tipusProd) {
-        this.tipusProd = tipusProd;
-    }
 
     public Data getDataOferta() {
         return dataOferta;
@@ -81,8 +73,8 @@ public class Producte {
 
     @Override
     public String toString() {
-        return "Producte [nomProd = " + nomProd + ", descripcio = " + descripcio + ", tipusProd = " + tipusProd
-                + ", dataOferta = " + dataOferta + "]";
+        return "Producte [nomProd=" + nomProd + ", descripcio=" + descripcio + ", dataOferta=" + dataOferta
+                + ", intercanviat=" + intercanviat + ", comptadorInter=" + comptadorInter + "]";
     }
-
+ 
 }

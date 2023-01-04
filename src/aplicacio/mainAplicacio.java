@@ -14,11 +14,14 @@ public class mainAplicacio {
     public static void main(String[] args) throws FileNotFoundException, EOFException, IOException {
         boolean finalFitxer = false;
         // BufferedReader fitUsuaris = new BufferedReader(newFileReader("Usuaris.txt"));
+        Usuari user;
         
         llistaUsuaris llistaUsu = new llistaUsuaris(MAX);
-        llistaProductes llistaProd = new llistaProductes(MAX);
         llistaPeticions llistaPet = new llistaPeticions(MAX);
-        iniciarSesio();
+        llegirFitxers();
+        
+        user = iniciarSesio();
+        
 
         //mostraOpcions();
         //int opcio = teclat.nextInt();
@@ -46,6 +49,7 @@ public class mainAplicacio {
             break;
 
             case 5:
+            registraServei();
             Scanner servei = new Scanner(System.in);
             System.out.println("Introdueix el nom del servei: ");
             servei.nextLine();
@@ -125,7 +129,7 @@ public class mainAplicacio {
 
     }
 
-    private static void iniciarSesio () throws IOException {
+    private static Usuari iniciarSesio () throws IOException {
         Scanner resposta = new Scanner(System.in);
         int valor;
         Usuari user = new Usuari(null, null, null);
@@ -160,6 +164,7 @@ public class mainAplicacio {
                     arxiuBin.CreaArxiuBinari(llistaUsers);
                 }
             }
+            
             System.out.println(llistaUsers.toString()); 
               
         }
@@ -169,6 +174,7 @@ public class mainAplicacio {
             
         }
         resposta.close();
+        return user;
     }
 
 	private static void mostraOpcions() {
@@ -206,7 +212,7 @@ public class mainAplicacio {
                 fraseSplit = frase.split(";");
                 String[] splitData = fraseSplit[3].split("/");
                 Data data = new Data(Integer.parseInt(splitData[0]), Integer.parseInt(splitData[1]), Integer.parseInt(splitData[2]));
-                Producte prod = new Producte(fraseSplit[0], fraseSplit[1], fraseSplit[2], data);
+                Producte prod = new Producte(fraseSplit[0], fraseSplit[2], data);
                 llistaProd.afegeixProducte(prod);
             }
         } catch (EOFException e) {
@@ -268,4 +274,52 @@ public class mainAplicacio {
         fitxerBinari.close(); 
     } 
 
+    public void registraServei(){
+        Servei serv;
+        String nom, desc, dat;
+        String[] dataSplit;
+        Data data;
+        llistaProductes llistaProd = new llistaProductes(MAX);
+
+        System.out.println("Introdueix el nom del servei:");
+        nom = teclat.nextLine();
+        System.out.println("Indica la descripcio:");
+        desc = teclat.nextLine();
+        System.out.println("Indica la data: [dd/mm/aaaa]:");
+        dat = teclat.nextLine();
+        dataSplit = dat.split("/");
+        data = new Data(Integer.parseInt(dataSplit[0]), Integer.parseInt(dataSplit[1]), Integer.parseInt(dataSplit[2]));
+        serv = new Servei(nom, desc, data);
+        llistaProd.afegeixBe(serv);
+        
+    }
+
+    public void registraBe(){
+        Be be;
+        String nom, desc, dat;
+        String[] dataSplit;
+        Data data;
+        int ampl, alça, fons, pes;
+    
+        //TODO falta passar llistaprod
+
+        System.out.println("Introudeix el nom del be:");
+        nom = teclat.nextLine();
+        System.out.println("Indica la descripcio del producte:");
+        desc = teclat.nextLine();
+        System.out.println("Indica la data [dd/mm/aaaa]:");
+        dat = teclat.nextLine();
+        dataSplit = dat.split("/");
+        data = new Data(Integer.parseInt(dataSplit[0]), Integer.parseInt(dataSplit[1]), Integer.parseInt(dataSplit[2]));
+        System.out.println("Indica la amplada del be en centimetres:");
+        ampl = teclat.nextInt();
+        System.out.println("Indica la alçada del be en centimetres:");
+        alça = teclat.nextInt();
+        System.out.println("Indica la fons del be en centimetres:");
+        fons = teclat.nextInt();
+        System.out.println("Indica el pes del be en kilograms i aproxima'l a un nombre enter:");
+        pes = teclat.nextInt();
+        be = new Be(nom, desc, data, ampl, alça, fons, pes);
+        llistaProd.afegeixBe(be);
+    }
 }

@@ -7,8 +7,8 @@ public class Be extends Producte {
     protected int amplada, alçada, fons, pes;
     protected Date dataIntercanvi;
 
-    public Be(int amplada, int alçada, int fons, int pes){
-        super(null, null, null, null);
+    public Be(String nom, String desc, Data data, int amplada, int alçada, int fons, int pes){
+        super(nom, desc, data);
         this.amplada = amplada;
         this.alçada = alçada;
         this.fons = fons;
@@ -56,10 +56,15 @@ public class Be extends Producte {
         this.dataIntercanvi = dataIntercanvi;
     }
 
-    @Override
-    public String toString() {
-        return "Be [amplada=" + amplada + ", alçada=" + alçada + ", fons=" + fons + ", pes=" + pes + "]";
+    public Be copia (){
+        Be aux = new Be(getNomProd(), getDescripcio(), getDataOferta(), amplada, alçada, fons, pes);
+        return aux;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Be [amplada=" + amplada + ", alçada=" + alçada + ", fons=" + fons + ", pes=" + pes + ", dataIntercanvi="
+                + dataIntercanvi + "]";
+    }
+
 }
