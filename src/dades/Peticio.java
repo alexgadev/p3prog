@@ -23,58 +23,85 @@ public class Peticio {
         valoracioRep = 0;
     }
 
-    public String getcodi() {
+    public String getCodi() {
         return codi;
     }
+
 
     public void setCodi(String codi) {
         this.codi = codi;
     }
 
+
     public Usuari getUsuariOfereix() {
         return usuariOfereix;
     }
+
 
     public void setUsuariOfereix(Usuari usuariOfereix) {
         this.usuariOfereix = usuariOfereix;
     }
 
+
     public Usuari getUsuariRep() {
         return usuariRep;
     }
+
 
     public void setUsuariRep(Usuari usuariRep) {
         this.usuariRep = usuariRep;
     }
 
-    public Producte getDestijat() {
+
+    public Producte getDesitjat() {
         return desitjat;
     }
 
-    public void setUsuariDestijat(Producte desitjat) {
+
+    public void setDesitjat(Producte desitjat) {
         this.desitjat = desitjat;
     }
+
 
     public Producte getOferit() {
         return oferit;
     }
 
-    public void setUsuariOferit(Producte oferit) {
+
+    public void setOferit(Producte oferit) {
         this.oferit = oferit;
     }
+
 
     public int getResposta() {
         return resposta;
     }
 
+
     public void setResposta(int resposta) {
-        resposta = 0;
+        this.resposta = resposta;
     }
-    /* 
-    public tipus() {
-        String t = oferit.getTipusProd();
+
+
+    public int getValoracioOfereix() {
+        return valoracioOfereix;
     }
-    */
+
+
+    public void setValoracioOfereix(int valoracioOfereix) {
+        this.valoracioOfereix = valoracioOfereix;
+    }
+
+
+    public int getValoracioRep() {
+        return valoracioRep;
+    }
+
+
+    public void setValoracioRep(int valoracioRep) {
+        this.valoracioRep = valoracioRep;
+    }
+
 
     public void valoracions() {
         if(resposta == 1) {
@@ -103,35 +130,4 @@ public class Peticio {
                 + desitjat + ", oferit=" + oferit + ", resposta=" + resposta + "]";
     }
 
-    public String getCodi() {
-        return codi;
-    }
-
-    public Producte getDesitjat() {
-        return desitjat;
-    }
-
-    public void setDesitjat(Producte desitjat) {
-        this.desitjat = desitjat;
-    }
-
-    public void setOferit(Producte oferit) {
-        this.oferit = oferit;
-    }
-
-    public int getValoracioOfereix() {
-        return valoracioOfereix;
-    }
-
-    public void setValoracioOfereix(int valoracioOfereix) {
-        this.valoracioOfereix = valoracioOfereix;
-    }
-
-    public int getValoracioRep() {
-        return valoracioRep;
-    }
-
-    public void setValoracioRep(int valoracioRep) {
-        this.valoracioRep = valoracioRep;
-    }
 }

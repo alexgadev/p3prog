@@ -87,9 +87,8 @@ public class llistaProductes {
     }
     
     public Producte serveiMesIntercanvis() {
-        Servei serveiMes = new Servei(null, null, null);
+        Servei serveiMes = null;
 
-        
         int j = 0;
         for(int i = 0; i < nProductes; i++) {
             if(llistaProd[i] instanceof Servei) { 
@@ -151,4 +150,13 @@ public class llistaProductes {
         this.llistaProd = llistaProd;
     }
     
+    public Producte getIessimServei(int i){
+        Servei aux = ((Servei)llistaProd[i]).copia();
+        return aux;
+    }
+    
+    public Producte getIessimBe(int i){
+        Be aux = ((Be)llistaProd[i]).copia();
+        return aux;
+    }
 }

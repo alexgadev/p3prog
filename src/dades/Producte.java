@@ -76,5 +76,5 @@ public abstract class Producte {
         return "Producte [nomProd=" + nomProd + ", descripcio=" + descripcio + ", dataOferta=" + dataOferta
                 + ", intercanviat=" + intercanviat + ", comptadorInter=" + comptadorInter + "]";
     }
- 
+    
 }

@@ -3,8 +3,7 @@ package aplicacio;
 import java.io.*;
 import java.util.Scanner;
 
-import auxiliar.CrearArxiuBinari;
-import auxiliar.carregarUsuaris;
+import auxiliar.*;
 import dades.*;
 
 public class mainAplicacio {
@@ -152,7 +151,7 @@ public class mainAplicacio {
             String codiPos = teclat.nextLine();
             
             user = new Usuari(alies, correu, codiPos);
-            llistaUsers = carregarUsu.carregarUsu();    //Carreguem els usuaris en una llista
+            llistaUsers = carregarUsu.carregarUsu();  //Carreguem els usuaris en una llista
 
             if(llistaUsers.getnUsuaris() == 0){
                 llistaUsers.afegirUsuari(user);
@@ -204,16 +203,36 @@ public class mainAplicacio {
         BufferedReader fitProductes = new BufferedReader(new FileReader("Productes.txt"));
         boolean finalFitxer = false;
         String frase = "";
-        String[] fraseSplit;
+        String data;
+        String[] fraseSplit, dataSplit;
+        Servei serv;
+        Be be;
         llistaProductes llistaProd = new llistaProductes(MAX);
         try{
             while (!finalFitxer) {
                 frase = fitProductes.readLine();
                 fraseSplit = frase.split(";");
-                String[] splitData = fraseSplit[3].split("/");
-                Data data = new Data(Integer.parseInt(splitData[0]), Integer.parseInt(splitData[1]), Integer.parseInt(splitData[2]));
-                Producte prod = new Producte(fraseSplit[0], fraseSplit[2], data);
-                llistaProd.afegeixProducte(prod);
+
+                //El nom, desc y dataOf son compartits ja sigui bé o servei
+                String nom = fraseSplit[1]; 
+                String desc = fraseSplit[2];
+                dataSplit = fraseSplit[3].split("/");
+                Data dataOf = new Data(Integer.parseInt(dataSplit[0]), Integer.parseInt(dataSplit[1]), Integer.parseInt(dataSplit[2]));
+
+                if(fraseSplit[0].equals("ser")){ //Si tenim un servei, crearem un nou servei
+                    dataSplit = fraseSplit[4].split("/"); //Separem per / per poder crear un objecte de la classe Data
+                    Data dataFiOf = new Data(Integer.parseInt(dataSplit[0]), Integer.parseInt(dataSplit[1]), Integer.parseInt(dataSplit[2]));
+                    serv = new Servei(nom, desc, dataOf, dataFiOf); //Creem el servei
+                    llistaProd.afegeixServei(serv); //L'afegim a la llista
+
+                } else if (fraseSplit[0].equals("be")){
+                    int amp = Integer.parseInt(fraseSplit[4]);  //Assignem l'amplada
+                    int alç = Integer.parseInt(fraseSplit[5]);  //Assignem l'alçada
+                    int fons = Integer.parseInt(fraseSplit[6]); //Assignem el fons
+                    int pes = Integer.parseInt(fraseSplit[7]);  //Assignem el pes
+                    be = new Be(nom, desc, dataOf, amp, alç, fons, pes); //Creem el bé
+                    llistaProd.afegeixBe(be); //L'afegim a la llista
+                }
             }
         } catch (EOFException e) {
             finalFitxer = true;
@@ -232,8 +251,8 @@ public class mainAplicacio {
         try{
             while (!finalFitxer) {
                 frase = fitPeticions.readLine();
-                fraseSplit = frase.split(";");
-
+                fraseSplit = frase.split(";");                
+                
                 Usuari userOf = new Usuari(fraseSplit[1], fraseSplit[2], fraseSplit[3]);
                 Usuari userRep = new Usuari(fraseSplit[5], fraseSplit[6], fraseSplit[7]);
 
