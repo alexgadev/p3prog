@@ -25,11 +25,7 @@ public abstract class Producte {
         }
     }
     
-    /*
-    public Producte copia(){
-        Producte aux = new Producte(nomProd, descripcio, dataOferta);
-        return aux;
-    } */
+    public abstract Producte copia();
 
     public String getNomProd() {
         return nomProd;

@@ -159,4 +159,9 @@ public class llistaProductes {
         Be aux = ((Be)llistaProd[i]).copia();
         return aux;
     }
+
+    public Producte getIessim(int i){
+        Producte aux = llistaProd[i].copia();
+        return aux;
+    }
 }

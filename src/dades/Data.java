@@ -16,7 +16,7 @@ public class Data {
     }
 
     public String toString() {
-		return("dia: "+dia+" mes: "+mes+" any: "+any);
+		return(dia+"/"+mes+"/"+any);
 	}
 
 	public Data copia() {

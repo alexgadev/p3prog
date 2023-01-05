@@ -14,14 +14,15 @@ public class mainAplicacio {
         boolean finalFitxer = false;
         // BufferedReader fitUsuaris = new BufferedReader(newFileReader("Usuaris.txt"));
         Usuari user;
-        
+        escriuProductes escriureFitxerProd = new escriuProductes();
+
         llistaUsuaris llistaUsu = new llistaUsuaris(MAX);
         llistaPeticions llistaPet = new llistaPeticions(MAX);
-        llegirFitxers();
+        llistaProductes llistaProd = new llistaProductes(MAX);
         
         user = iniciarSesio();
-        
 
+        llegirFitxers();
         //mostraOpcions();
         //int opcio = teclat.nextInt();
         
@@ -203,7 +204,7 @@ public class mainAplicacio {
         BufferedReader fitProductes = new BufferedReader(new FileReader("Productes.txt"));
         boolean finalFitxer = false;
         String frase = "";
-        String data;
+        //String data;
         String[] fraseSplit, dataSplit;
         Servei serv;
         Be be;
@@ -246,19 +247,19 @@ public class mainAplicacio {
         String[] fraseSplit;
         boolean finalFitxer = false;
         llistaPeticions llistaPet = new llistaPeticions(MAX);
-        
+        Usuari usuariOf, usuariRep;
+        String nom, desc;
+        Data data, dataFiOferiment;
+        String[] dataSplit;
+        Peticio pet;  
+        Servei servOf, servRep;
+        Be beOf, beRep;           
+        int amplada, alçada, fons, pes;
+
         try{
             while (!finalFitxer) {
                 frase = fitPeticions.readLine();
                 fraseSplit = frase.split(";"); 
-                Usuari usuariOf, usuariRep;
-                String nom, desc;
-                Data data, dataFiOferiment;
-                String[] dataSplit;
-                Peticio pet;  
-                Servei servOf, servRep;
-                Be beOf, beRep;           
-                int amplada, alçada, fons, pes;
                 
                 String codi = fraseSplit[0]; //Codi de la petició
                 String alies = fraseSplit[1];
@@ -269,7 +270,7 @@ public class mainAplicacio {
                 alies = fraseSplit[4];
                 correu = fraseSplit[5];
                 codiPos = fraseSplit[6];
-                usuariRep = new Usuari(alies, correu, codiPos);
+                usuariRep = new Usuari(alies, correu, codiPos); //Creem l'usuari que rep
 
                 //Si prodOf es un servei i prodRep es servei també
                 if(fraseSplit[7].equals("ser") && fraseSplit[12].equals("ser")){
