@@ -244,30 +244,142 @@ public class mainAplicacio {
         BufferedReader fitPeticions = new BufferedReader(new FileReader("Peticions.txt"));
         String frase = "";
         String[] fraseSplit;
-        String[] fraseSplitData;
         boolean finalFitxer = false;
         llistaPeticions llistaPet = new llistaPeticions(MAX);
         
         try{
             while (!finalFitxer) {
                 frase = fitPeticions.readLine();
-                fraseSplit = frase.split(";");                
+                fraseSplit = frase.split(";"); 
+                Usuari usuariOf, usuariRep;
+                String nom, desc;
+                Data data, dataFiOferiment;
+                String[] dataSplit;
+                Peticio pet;  
+                Servei servOf, servRep;
+                Be beOf, beRep;           
+                int amplada, alçada, fons, pes;
                 
-                Usuari userOf = new Usuari(fraseSplit[1], fraseSplit[2], fraseSplit[3]);
-                Usuari userRep = new Usuari(fraseSplit[5], fraseSplit[6], fraseSplit[7]);
+                String codi = fraseSplit[0]; //Codi de la petició
+                String alies = fraseSplit[1];
+                String correu = fraseSplit[2];
+                String codiPos = fraseSplit[3];
+                usuariOf = new Usuari(alies, correu, codiPos); //Creem l'usuari que ofereix
 
-                fraseSplitData = fraseSplit[11].split("/");
-                Data dataProd = new Data(Integer.parseInt(fraseSplitData[0]), Integer.parseInt(fraseSplitData[1]), Integer.parseInt(fraseSplitData[2]));
-                Producte prodDes = new Producte(fraseSplit[8], fraseSplit[9], fraseSplit[10], dataProd);
-                
-                fraseSplitData = fraseSplit[14].split("/");
-                dataProd = new Data(Integer.parseInt(fraseSplitData[0]), Integer.parseInt(fraseSplitData[1]), Integer.parseInt(fraseSplitData[2]));
-                Producte prodOf = new Producte(fraseSplit[11], fraseSplit[12], fraseSplit[13], dataProd);
-    
-                Peticio peticio = new Peticio(fraseSplit[0], userOf, userRep, prodDes, prodOf);
-                llistaPet.afegeixPeticio(peticio);
-                //peticio.setNumeroIntercanvis(Integer.parseInt(fraseSplit[4]));
+                alies = fraseSplit[4];
+                correu = fraseSplit[5];
+                codiPos = fraseSplit[6];
+                usuariRep = new Usuari(alies, correu, codiPos);
+
+                //Si prodOf es un servei i prodRep es servei també
+                if(fraseSplit[7].equals("ser") && fraseSplit[12].equals("ser")){
+
+                    nom = fraseSplit[8];
+                    desc = fraseSplit[9];
+                    dataSplit = fraseSplit[10].split("/");
+                    data = new Data(Integer.parseInt(dataSplit[0]), Integer.parseInt(dataSplit[1]), Integer.parseInt(dataSplit[2]));
+                    if(dataSplit[11] != null){
+                        dataSplit = fraseSplit[11].split("/");
+                        dataFiOferiment = new Data(Integer.parseInt(dataSplit[0]), Integer.parseInt(dataSplit[1]), Integer.parseInt(dataSplit[2]));
+                        servOf = new Servei(nom, desc, data, dataFiOferiment);
+                    } else {
+                        servOf = new Servei(nom, desc, data);
+                    }
+                    nom = fraseSplit[13];
+                    desc = fraseSplit[14];
+                    dataSplit = fraseSplit[15].split("/");
+                    data = new Data(Integer.parseInt(dataSplit[0]), Integer.parseInt(dataSplit[1]), Integer.parseInt(dataSplit[2]));
+                    if(dataSplit[16] != null) {
+                        dataSplit = fraseSplit[16].split("/");
+                        dataFiOferiment = new Data(Integer.parseInt(dataSplit[0]), Integer.parseInt(dataSplit[1]), Integer.parseInt(dataSplit[2]));
+                        servRep = new Servei(nom, desc, data, dataFiOferiment);
+                    } else {
+                        servRep = new Servei(nom, desc, data);
+                    }
+                    pet = new Peticio(codi, usuariOf, usuariRep, servOf, servRep);
+                    llistaPet.afegeixPeticio(pet);
+
+                } else if(fraseSplit[7].equals("ser") && fraseSplit[12].equals("be")){ //Si prodOf es un servei i prodRep es un be
+
+                    nom = fraseSplit[8];
+                    desc = fraseSplit[9];
+                    dataSplit = fraseSplit[10].split("/");
+                    data = new Data(Integer.parseInt(dataSplit[0]), Integer.parseInt(dataSplit[1]), Integer.parseInt(dataSplit[2]));
+                    if(dataSplit[11] != null){
+                        dataSplit = fraseSplit[11].split("/");
+                        dataFiOferiment = new Data(Integer.parseInt(dataSplit[0]), Integer.parseInt(dataSplit[1]), Integer.parseInt(dataSplit[2]));
+                        servOf = new Servei(nom, desc, data, dataFiOferiment);
+                    } else {
+                        servOf = new Servei(nom, desc, data);
+                    }
+
+                    nom = fraseSplit[13];
+                    desc = fraseSplit[14];
+                    dataSplit = fraseSplit[15].split("/");
+                    data = new Data(Integer.parseInt(dataSplit[0]), Integer.parseInt(dataSplit[1]), Integer.parseInt(dataSplit[2]));
+                    amplada = Integer.parseInt(fraseSplit[16]);
+                    alçada = Integer.parseInt(fraseSplit[17]);
+                    fons = Integer.parseInt(fraseSplit[18]);
+                    pes = Integer.parseInt(fraseSplit[19]);
+                    beRep = new Be(nom, desc, data, amplada, alçada, fons, pes);
+                    
+                    pet = new Peticio(codi, usuariOf, usuariRep, servOf, beRep);
+                    llistaPet.afegeixPeticio(pet);
+
+                } else if (fraseSplit[7].equals("be") && fraseSplit[12].equals("be")){ //Si prodOf es un be i prodRep es un be també
+                    
+                    nom = fraseSplit[8];
+                    desc = fraseSplit[9];
+                    dataSplit = fraseSplit[10].split("/");
+                    data = new Data(Integer.parseInt(dataSplit[0]), Integer.parseInt(dataSplit[1]), Integer.parseInt(dataSplit[2]));
+                    amplada = Integer.parseInt(fraseSplit[11]);
+                    alçada = Integer.parseInt(fraseSplit[12]);
+                    fons = Integer.parseInt(fraseSplit[13]);
+                    pes = Integer.parseInt(fraseSplit[14]);
+                    beOf = new Be(nom, desc, data, amplada, alçada, fons, pes);
+
+                    nom = fraseSplit[15];
+                    desc = fraseSplit[16];
+                    dataSplit = fraseSplit[17].split("/");
+                    data = new Data(Integer.parseInt(dataSplit[0]), Integer.parseInt(dataSplit[1]), Integer.parseInt(dataSplit[2]));
+                    amplada = Integer.parseInt(fraseSplit[18]);
+                    alçada = Integer.parseInt(fraseSplit[19]);
+                    fons = Integer.parseInt(fraseSplit[20]);
+                    pes = Integer.parseInt(fraseSplit[21]);
+                    beRep = new Be(nom, desc, data, amplada, alçada, fons, pes);
+
+                    pet = new Peticio(codi, usuariOf, usuariRep, beOf, beRep);
+                    llistaPet.afegeixPeticio(pet);
+
+                } else if (fraseSplit[7].equals("be") && fraseSplit[12].equals("ser")){ //Si prodOf es un be i prodRep es un servei               
+                    
+                    nom = fraseSplit[8];
+                    desc = fraseSplit[9];
+                    dataSplit = fraseSplit[10].split("/");
+                    data = new Data(Integer.parseInt(dataSplit[0]), Integer.parseInt(dataSplit[1]), Integer.parseInt(dataSplit[2]));
+                    amplada = Integer.parseInt(fraseSplit[11]);
+                    alçada = Integer.parseInt(fraseSplit[12]);
+                    fons = Integer.parseInt(fraseSplit[13]);
+                    pes = Integer.parseInt(fraseSplit[14]);
+                    beOf = new Be(nom, desc, data, amplada, alçada, fons, pes);
+                    
+                    nom = fraseSplit[15];
+                    desc = fraseSplit[16];
+                    dataSplit = fraseSplit[17].split("/");
+                    data = new Data(Integer.parseInt(dataSplit[0]), Integer.parseInt(dataSplit[1]), Integer.parseInt(dataSplit[2]));
+                    if(dataSplit[18] != null){
+                        dataSplit = fraseSplit[18].split("/");
+                        dataFiOferiment = new Data(Integer.parseInt(dataSplit[0]), Integer.parseInt(dataSplit[1]), Integer.parseInt(dataSplit[2]));
+                        servRep = new Servei(nom, desc, data, dataFiOferiment);
+                    } else {
+                        servRep = new Servei(nom, desc, data);
+                    }
+
+                    pet = new Peticio(codi, usuariOf, usuariRep, beOf, servRep);
+                    llistaPet.afegeixPeticio(pet);
+                } 
             }
+            
         } catch (EOFException e){
             finalFitxer = true;
         }
@@ -339,6 +451,6 @@ public class mainAplicacio {
         System.out.println("Indica el pes del be en kilograms i aproxima'l a un nombre enter:");
         pes = teclat.nextInt();
         be = new Be(nom, desc, data, ampl, alça, fons, pes);
-        llistaProd.afegeixBe(be);
+        //llistaProd.afegeixBe(be);
     }
 }
