@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 import dades.Usuari;
+import interficieGrafica.*;
 
 public class mainAplicacioGrafica extends JFrame {
     private static final long serialVersionUID = 1L;
@@ -11,26 +12,34 @@ public class mainAplicacioGrafica extends JFrame {
     private JTextArea teclat;
     private JButton boto;
     private JLabel etiqueta;
+    
+    
 
     public mainAplicacioGrafica(String titol){
         super(titol);
-        this.setLocation(100, 200);
-        this.setSize(500, 300);
+        this.setLocation(100, 100);
+        this.setSize(400, 350);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        demanaUsuari();
         this.setVisible(true);
-        this.setLayout(new BorderLayout());
-        this.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        JLabel etiqueta=new JLabel("Indica el teu codi d'usuari");
-        this.add(etiqueta);
-        JTextField nom=new JTextField(25);
-        this.add(nom);
-    }
-
-    public void registraUsuari() {
         
         
     }
     
+    public void demanaUsuari(){
+        accioDelTextField accioText = new accioDelTextField(this);
+
+        this.setLayout(new FlowLayout(FlowLayout.LEFT,5 ,5));
+        JLabel etiquetaUsu = new JLabel("Introdueix el nom de l'usuari: ");
+        this.add(etiquetaUsu);
+        etiquetaUsu.setBackground(Color.WHITE);
+
+        JTextField ompleUsuari = new JTextField("el teu nom...      ", 15);
+        ompleUsuari.setForeground(Color.LIGHT_GRAY);
+        ompleUsuari.addActionListener(accioText);
+        this.add(ompleUsuari);
+    }  
+        
     public static void main(String[] args) {
         new mainAplicacioGrafica("BENVINGUT/DA");
     }

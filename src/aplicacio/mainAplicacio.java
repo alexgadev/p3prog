@@ -222,8 +222,12 @@ public class mainAplicacio {
 
                 if(fraseSplit[0].equals("ser")){ //Si tenim un servei, crearem un nou servei
                     dataSplit = fraseSplit[4].split("/"); //Separem per / per poder crear un objecte de la classe Data
-                    Data dataFiOf = new Data(Integer.parseInt(dataSplit[0]), Integer.parseInt(dataSplit[1]), Integer.parseInt(dataSplit[2]));
+                    if(dataSplit[0].equals("null")){
+                        serv = new Servei(nom, desc, dataOf);
+                    } else {
+                        Data dataFiOf = new Data(Integer.parseInt(dataSplit[0]), Integer.parseInt(dataSplit[1]), Integer.parseInt(dataSplit[2]));
                     serv = new Servei(nom, desc, dataOf, dataFiOf); //Creem el servei
+                    }
                     llistaProd.afegeixServei(serv); //L'afegim a la llista
 
                 } else if (fraseSplit[0].equals("be")){
