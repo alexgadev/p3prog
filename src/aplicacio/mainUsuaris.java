@@ -25,7 +25,7 @@ public class mainUsuaris {
         p1.setValoracioOfereix(1);
         p1.setValoracioRep(5);
         System.out.println("---------------------------");
-        System.out.println(llistaUsu.valoUsuaris(2, p1));    
+        //System.out.println(llistaUsu.valoUsuaris(2, p1));    
         
         //System.out.println(llistaUsu.toString()); 
        

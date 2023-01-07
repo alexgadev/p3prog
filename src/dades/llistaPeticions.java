@@ -71,6 +71,18 @@ public class llistaPeticions {
             teclat.close();
         } 
     }
+
+    //TODO hacer aqui el valoraUsuaris
+    /*
+    public llistaUsuaris valoUsuaris(int llindar){
+        llistaUsuaris llistaUsuAux = new llistaUsuaris(100);
+
+        for(int i = 0; i < llistaUsuAux.getnUsuaris(); i++){
+            if(llistaPeticio[i])
+        }
+
+        return llistaUsuAux;
+    } */
     
     public String toString(){
         String text = "";

@@ -10,177 +10,260 @@ public class mainAplicacio {
     static final int MAX = 0;
     static Scanner teclat = new Scanner(System.in);
 
-    public static void main(String[] args) throws FileNotFoundException, EOFException, IOException {
-        boolean finalFitxer = false;
-        // BufferedReader fitUsuaris = new BufferedReader(newFileReader("Usuaris.txt"));
-        Usuari user;
-        escriuProductes escriureFitxerProd = new escriuProductes();
-
-        llistaUsuaris llistaUsu = new llistaUsuaris(MAX);
+    public static void main(String[] args) throws FileNotFoundException, EOFException, IOException, ClassNotFoundException {
+        boolean correcte = false;
+        //escriuProductes escriureFitxerProd = new escriuProductes();
+        int valor;
+        carregarUsuaris carregarUsu = new carregarUsuaris();
         llistaPeticions llistaPet = new llistaPeticions(MAX);
         llistaProductes llistaProd = new llistaProductes(MAX);
-        
-        user = iniciarSesio();
-
-        llegirFitxers();
-        //mostraOpcions();
-        //int opcio = teclat.nextInt();
-        
-        /* 
-        switch(opcio) {
-            case 1:
-            llegirFitxers();
-            break;
-
-            case 2: 
-            System.out.println(llistaUsu.toString()+"\n"); 
-            
-            System.out.println(llistaProd.toString()+"\n");    
-            
-            System.out.println(llistaPet.toString()+"\n"); 
-            break;
-
-            case 3: 
-            System.out.println(llistaProd.serveisActius()); 
-            break;
-
-            case 4: 
-            System.out.println(llistaProd.bensActius());
-            break;
-
-            case 5:
-            registraServei();
-            Scanner servei = new Scanner(System.in);
-            System.out.println("Introdueix el nom del servei: ");
-            servei.nextLine();
-            System.out.println("");
-            llistaProd.afegeixProducteServei(null);
-            break;
-
-            case 6: 
-            
-            break;
-
-            case 7: 
-            
-            break;
-
-            case 8: 
-            
-            break;
-
-            case 9: 
-            
-            break;
-
-            case 10: 
-            
-            break;
-
-            case 11: 
-            
-            break;
-
-            case 12: 
-            
-            break;
-
-            case 13: 
-            
-            break;
-
-            case 14: 
-            
-            break;
-
-            case 15: 
-            
-            break;
-
-            case 16: 
-            
-            break;
-            
-            case 17: 
-            
-            break;
-        }
-        teclat.close();
-    */
-    } 
-
-    private static void llegirFitxers() {
-        boolean finalFitxer = false;
-        try {
-            llegirPeticions();
-            llegirProductes();
-            llegirUsuaris();
-
-        } catch (EOFException e) {
-            System.out.println("[+] No hi ha més dades a llegir... " + e);
-            finalFitxer = true;
-        } catch (FileNotFoundException e) {
-            System.out.println("Fitxer incorrecte" + e);
-        } catch (IOException e) {
-            System.out.println(e);
-        } catch (ClassNotFoundException e){
-            System.err.println(e);
-        }
-
-    }
-
-    private static Usuari iniciarSesio () throws IOException {
-        Scanner resposta = new Scanner(System.in);
-        int valor;
-        Usuari user = new Usuari(null, null, null);
-        llistaUsuaris llistaUsers = new llistaUsuaris(100);
-        carregarUsuaris carregarUsu = new carregarUsuaris();
+        llistaUsuaris llistaUsers = new llistaUsuaris(MAX);
         CrearArxiuBinari arxiuBin = new CrearArxiuBinari();
-       
 
+        llistaUsers = llegirUsuaris();
         System.out.println("Tria una opció: ");
         System.out.println("[1]: REGISTRAR UN NOU USUARI");
         System.out.println("[2]: INICIAR SESSIÓ");
-        valor = resposta.nextInt();
+        System.out.println("[3]: SORTIR");
+        valor = Integer.parseInt(teclat.nextLine());
         
-        if (valor == 1){
-            System.out.println("Introdueix l'alies: ");
-            String alies = teclat.nextLine();
-            System.out.println("Introdueix el correu: ");
-            String correu = teclat.nextLine();
-            System.out.println("Introdueix el codi postal: ");
-            String codiPos = teclat.nextLine();
-            
-            user = new Usuari(alies, correu, codiPos);
-            llistaUsers = carregarUsu.carregarUsu();  //Carreguem els usuaris en una llista
-
-            if(llistaUsers.getnUsuaris() == 0){
-                llistaUsers.afegirUsuari(user);
-                arxiuBin.CreaArxiuBinari(llistaUsers);
-
-            } else {
-                if(!llistaUsers.comprovaIgualtats(user)){
+        while(!correcte){
+            if (valor == 1){
+                System.out.println("Introdueix l'alies: ");
+                String alies = teclat.nextLine();
+                System.out.println("Introdueix el correu: ");
+                String correu = teclat.nextLine();
+                System.out.println("Introdueix el codi postal: ");
+                String codiPos = teclat.nextLine();
+                
+                Usuari user = new Usuari(alies, correu, codiPos);
+                llistaUsers = carregarUsu.carregarUsu();  //Carreguem els usuaris en una llista
+    
+                if(llistaUsers.getnUsuaris() == 0){
                     llistaUsers.afegirUsuari(user);
                     arxiuBin.CreaArxiuBinari(llistaUsers);
+    
+                } else {
+                    if(!llistaUsers.comprovaIgualtats(user)){
+                        llistaUsers.afegirUsuari(user);
+                        arxiuBin.CreaArxiuBinari(llistaUsers);
+                    }
+                }
+                correcte = true;
+            }
+            else if (valor == 2) {
+                Scanner teclat2 = new Scanner(System.in);
+                System.out.println("Introdueix l'alies de l'usuari: ");
+                String alies = teclat2.nextLine();
+                int posUsuari;
+                if(!llistaUsers.comprovaUsuari(alies)){
+                    System.out.println("Usuari no existent! Introdueix un nom vàlid!");
+                } else {
+                    System.out.println("Benvingut/da!"+alies);
+                    posUsuari = llistaUsers.getPosicioUsuari(alies, llistaUsers);
+                    String correu = llistaUsers.getIessim(posUsuari).getCorreu();
+                    String codiPos = llistaUsers.getIessim(posUsuari).getCodiPostal();
+                    Usuari usu = new Usuari(alies, correu, codiPos);
+                    System.out.println("A continuació, tria una opció");
+                    mostraOpcions();
+                    int opcio = teclat2.nextInt();
+                    triaOpcio(opcio, llistaPet, llistaProd, llistaUsers, usu);
+                    teclat2.close();
+                    correcte = true;
+                }
+            } else if (valor == 3){
+                correcte = true;
+            }
+        }
+    } 
+
+    private static boolean triaOpcio(int opcio, llistaPeticions llistaPet, llistaProductes llistaProd, llistaUsuaris llistaUsu, Usuari user)
+        throws IOException, ClassNotFoundException {
+            boolean correcte = false;
+            while(!correcte){
+                switch(opcio) {
+                    //1. Carregar les dades dels fitxers
+                    case 1:
+                    llegirFitxers();
+                    correcte = true;
+                    break;
+        
+                    //2. Llistar les dades de qualsevol llista que tingueu definida
+                    case 2: 
+                    System.out.println("Llista d'Usuaris");
+                    System.out.println(llistaUsu.toString()+"\n"); 
+        
+                    System.out.println("Llista de Productes");
+                    System.out.println(llistaProd.toString()+"\n");    
+                    
+                    System.out.println("Llista de Peticions");
+                    System.out.println(llistaPet.toString()+"\n"); 
+                    correcte = true;
+                    break;
+        
+                    //3. Llistar les ofertes de serveis que estan actives
+                    case 3: 
+                    System.out.println(llistaProd.serveisActius().toString()); 
+                    correcte = true;
+                    break;
+        
+                    //4. Llistar els béns o productes físics que estan disponibles
+                    case 4: 
+                    System.out.println(llistaProd.bensActius().toString());
+                    correcte = true;
+                    break;
+        
+                    //5. Afegir una nova oferta de serveis
+                    case 5:
+                    registraServei();
+                    correcte = true;
+                    break;
+        
+                    //6. Afegir un nou bé o producte físic a intercanviar.
+                    case 6: 
+                    registraBe();
+                    correcte = true;
+                    break;
+        
+                    //7. Afegir una nova petició d’intercanvi.
+                    //TODO falta hacer este metodo
+                    case 7: 
+                    
+                    break;
+        
+                    //8. Acceptar o refusar una petició d’intercanvi. Si s’accepta, s’ha d’afegir la valoració de les dues parts.
+                    case 8: 
+                    llistaPet.respostaPeticio(null, null);
+                    correcte = true;
+                    break;
+        
+                    //9. Donar d’alta un nou usuari.
+                    case 9: 
+                    
+                    break;
+                    
+                    /*10. Donar de baixa un bé o producte físic a intercanviar i eliminar-lo de la llista. Només es podrà
+                    de donar de baixa si encara no s’ha fet cap intercanvi amb ell.*/
+                    case 10: 
+                    llistaProd.eliminaProducteFisic(eliminaProducte());
+                    correcte = true;
+                    break;
+        
+                    //11. Desactivar un servei. Aquest servei ja no estarà operatiu però no l’esborrem de les llistes.
+                    case 11: 
+                    llistaProd.donarDeBaixaServei(desactivaServei());
+                    correcte = true;
+                    break;
+        
+                    //12. Mostrar les peticions d’intercanvi pendents de respondre.
+                    case 12: 
+                    System.out.println(llistaPet.mostraPeticionsPendents().toString());
+                    correcte = true;    
+                    break;
+        
+                    //13. Mostrar les peticions d’intercanvi acceptades.
+                    case 13: 
+                    System.out.println(llistaPet.mostraPeticionsAcceptades().toString());
+                    correcte = true;
+                    break;
+                    
+                    //14. Mostrar les peticions d’intercanvi refusades.
+                    case 14: 
+                    System.out.println(llistaPet.mostraPeticionsRefusades().toString());
+                    correcte = true;
+                    break;
+        
+                    //15. Mostrar els usuaris que tenen valoracions en els seus intercanvis superiors a un llindar que indiqui l’usuari.
+                    case 15: 
+                    //TODO arreglar procedimiento valoracioUsuaris
+                    //llistaUsu.valoUsuaris(opcio, null)
+                    break;
+        
+                    //16. Mostrar el servei del qual s’han fet més intercanvis i indicar el número d’aquests.
+                    case 16: 
+                    System.out.println(llistaProd.serveiMesIntercanvis().toString());
+                    correcte = true; 
+                    break;
+                    
+                    //17. Sortir de l’aplicació.
+                    case 17: 
+                    correcte = true;
+                    break;
                 }
             }
-            
-            System.out.println(llistaUsers.toString()); 
-              
+        return correcte;
+    }
+
+    private static Servei desactivaServei() {
+        Servei serv;
+        String[] dataSplit;
+        Data data, dataFiOf;
+
+        System.out.println("Quin servei vols desactivar?");
+        String nomSer = teclat.nextLine();
+        System.out.println("Indica la descripcio del servei");
+        String desc = teclat.nextLine();
+        System.out.println("Introdueix la data si us plau [dd/mm/aaaa]");
+        String dat = teclat.nextLine();
+        dataSplit = dat.split("/");
+        data = new Data(Integer.parseInt(dataSplit[0]), Integer.parseInt(dataSplit[1]), Integer.parseInt(dataSplit[2]));
+        System.out.println("El servei te data fi d'oferiment? [Si/No]");
+        String resp = teclat.nextLine();
+        if(resp.equalsIgnoreCase("Si")){
+            System.out.println("Introdueix-la si us plau [dd/mm/aaaa]");
+            dat = teclat.nextLine();
+            dataSplit = dat.split("/");
+            dataFiOf = new Data(Integer.parseInt(dataSplit[0]), Integer.parseInt(dataSplit[1]), Integer.parseInt(dataSplit[2]));
+            serv = new Servei(nomSer, desc, data, dataFiOf);
+        } else {
+            serv = new Servei(nomSer, desc, data);
         }
-        else if (valor == 2) {
-            System.out.println("Introdueix l'alies de l'usuari: ");
-            String alies = resposta.nextLine();
-            
+        return serv;
+    }
+
+    private static Be eliminaProducte() {
+        String[] dataSplit;
+        Data data;
+        Be be;
+
+        System.out.println("Quin be vols eliminar?");
+        String prod = teclat.nextLine();
+        System.out.println("D'acord, ara indica la resta de dades si us plau");
+        System.out.println("Indica la descripcio");
+        String desc = teclat.nextLine();
+        System.out.println("Indica la data [dd/mm/aaaa]");
+        String dat = teclat.nextLine();
+        dataSplit = dat.split("/");
+        data = new Data(Integer.parseInt(dataSplit[0]), Integer.parseInt(dataSplit[1]), Integer.parseInt(dataSplit[2]));
+        System.out.println("Indica l'amplada en cm");
+        int amplada = teclat.nextInt();
+        System.out.println("Indica l'alçada en cm");
+        int alçada = teclat.nextInt();
+        System.out.println("Indica el fons en cm");
+        int fons = teclat.nextInt();
+        System.out.println("Indica el pes en kg, arrodonint enters a l'alça");
+        int pes = teclat.nextInt();
+
+        be = new Be(prod, desc, data, amplada, alçada, fons, pes);
+        return be;
+    }
+
+    private static void llegirFitxers() throws IOException, ClassNotFoundException{
+        try{
+            llegirPeticions();
+            llegirProductes();
+            llegirUsuaris();
+        } catch (IOException e){
+            System.err.println(e);
+        } catch (ClassNotFoundException e){
+            System.err.println(e);
         }
-        resposta.close();
-        return user;
     }
 
 	private static void mostraOpcions() {
 
         System.out.println("Benvinguts a l'aplicació d'intercanvis");
-        System.out.print("Elegeix la opció que vols: ");
+        System.out.println("Tria la opció que vols: ");
         System.out.println("[1] Carregar les dades dels fitxers");
         System.out.println("[2] Llistar les dades de qualsevol llista que tingueu definida");
         System.out.println("[3] Llistar les ofertes de serveis que estan actives");
@@ -190,7 +273,7 @@ public class mainAplicacio {
         System.out.println("[7] Afegir una nova petició d’intercanvi");
         System.out.println("[8] Acceptar o refusar una petició d’intercanvi. Si s’accepta, s’ha d’afegir la valoració de les dues parts");
         System.out.println("[9] Donar d’alta un nou usuari");
-        System.out.println("[10] Donar de baixa un bé o producte físic a intercanviar i eliminar-lo de la llista\n     Només es podrà de donar de baixa si encara no s’ha fet cap intercanvi amb ell");
+        System.out.println("[10] Donar de baixa un bé o producte físic a intercanviar i eliminar-lo de la llista. Només es podrà de donar de baixa si encara no s’ha fet cap intercanvi amb ell");
         System.out.println("[11] Desactivar un servei. Aquest servei ja no estarà operatiu però no l’esborrem de les llistes");
         System.out.println("[12] Mostrar les peticions d’intercanvi pendents de respondre");
         System.out.println("[13] Mostrar les peticions d’intercanvi acceptades");
@@ -200,7 +283,7 @@ public class mainAplicacio {
         System.out.println("[17] Sortir de l’aplicació");
     }
 
-    public static void llegirProductes() throws IOException {
+    public static llistaProductes llegirProductes() throws IOException {
         BufferedReader fitProductes = new BufferedReader(new FileReader("Productes.txt"));
         boolean finalFitxer = false;
         String frase = "";
@@ -243,9 +326,10 @@ public class mainAplicacio {
             finalFitxer = true;
         }
         fitProductes.close();
+        return llistaProd;
     }
 
-    public static void llegirPeticions() throws IOException {
+    public static llistaPeticions llegirPeticions() throws IOException {
         BufferedReader fitPeticions = new BufferedReader(new FileReader("Peticions.txt"));
         String frase = "";
         String[] fraseSplit;
@@ -389,32 +473,21 @@ public class mainAplicacio {
             finalFitxer = true;
         }
         fitPeticions.close();
+        return llistaPet;
     }
 
-    public static void llegirUsuaris() throws IOException, ClassNotFoundException {
-        ObjectInputStream fitxerBinari = new ObjectInputStream(new FileInputStream("Usuaris.bin"));
-        boolean finalFitxer = false;
+    public static llistaUsuaris llegirUsuaris() throws IOException, ClassNotFoundException {
+        carregarUsuaris carregarUsu = new carregarUsuaris();
         llistaUsuaris llistaUsu = new llistaUsuaris(MAX);
-        Usuari usu;
-        
-        try {
-            while(!finalFitxer) {
-                usu = (Usuari) fitxerBinari.readObject();
-                llistaUsu.afegirUsuari(usu);
-            }
-        } catch (EOFException e){
-            finalFitxer = true;
-        } catch (ClassNotFoundException e){
-            System.err.println(e);
-        }
-        fitxerBinari.close(); 
+        llistaUsu = carregarUsu.carregarUsu();
+        return llistaUsu; 
     } 
 
-    public void registraServei(){
+    public static void registraServei(){
         Servei serv;
-        String nom, desc, dat;
+        String nom, desc, dat, opcio;
         String[] dataSplit;
-        Data data;
+        Data data, dataFiOferiment;
         llistaProductes llistaProd = new llistaProductes(MAX);
 
         System.out.println("Introdueix el nom del servei:");
@@ -425,19 +498,27 @@ public class mainAplicacio {
         dat = teclat.nextLine();
         dataSplit = dat.split("/");
         data = new Data(Integer.parseInt(dataSplit[0]), Integer.parseInt(dataSplit[1]), Integer.parseInt(dataSplit[2]));
-        serv = new Servei(nom, desc, data);
+        System.out.println("Vols introduir data de final d'oferiment del servei? [Si/No]");
+        opcio = teclat.nextLine();
+        if(opcio.equalsIgnoreCase("Si")){
+            System.out.println("Indica la data: [dd/mm/aaaa]");
+            dat = teclat.nextLine();
+            dataSplit = dat.split("/");
+            dataFiOferiment = new Data(Integer.parseInt(dataSplit[0]), Integer.parseInt(dataSplit[1]), Integer.parseInt(dataSplit[2]));
+            serv = new Servei(nom, desc, data, dataFiOferiment);
+        } else {
+            serv = new Servei(nom, desc, data);
+        }
         llistaProd.afegeixBe(serv);
-        
     }
 
-    public void registraBe(){
+    public static void registraBe(){
         Be be;
         String nom, desc, dat;
         String[] dataSplit;
         Data data;
         int ampl, alça, fons, pes;
-    
-        //TODO falta passar llistaprod
+        llistaProductes llistaProd = new llistaProductes(MAX);
 
         System.out.println("Introudeix el nom del be:");
         nom = teclat.nextLine();
@@ -456,6 +537,7 @@ public class mainAplicacio {
         System.out.println("Indica el pes del be en kilograms i aproxima'l a un nombre enter:");
         pes = teclat.nextInt();
         be = new Be(nom, desc, data, ampl, alça, fons, pes);
-        //llistaProd.afegeixBe(be);
+        llistaProd.afegeixBe(be);
+        
     }
 }

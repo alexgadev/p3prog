@@ -52,7 +52,7 @@ public class llistaProductes {
         }
     }
 
-    public void donarDeBaixaServei(Producte prod) {
+    public void donarDeBaixaServei(Servei serv) {
         Scanner teclat = new Scanner(System.in);
         System.out.println("Introdueix el nom del producte: ");
         String nom = teclat.nextLine();
@@ -123,11 +123,11 @@ public class llistaProductes {
         return aux;
     }
 
-
+    //TODO revisar este metodo ya que si esta intercambiado puede seguir intercambiandose
     public llistaProductes bensActius() {
         llistaProductes aux = new llistaProductes(nProductes);
         for(int i = 0; i < nProductes; i++) {
-            if(llistaProd[i] instanceof Be) {
+            if(llistaProd[i] instanceof Be && llistaProd[i].getIntercanviat() == false) {
                 aux.afegeixBe(llistaProd[i]);
             }
         }

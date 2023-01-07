@@ -3,7 +3,6 @@ package aplicacio;
 import javax.swing.*;
 import java.awt.*;
 
-import dades.Usuari;
 import interficieGrafica.*;
 
 public class mainAplicacioGrafica extends JFrame {
@@ -12,7 +11,6 @@ public class mainAplicacioGrafica extends JFrame {
     private JTextArea teclat;
     private JButton boto;
     private JLabel etiqueta;
-    
     
 
     public mainAplicacioGrafica(String titol){
@@ -23,12 +21,9 @@ public class mainAplicacioGrafica extends JFrame {
         demanaUsuari();
         this.setVisible(true);
         
-        
     }
     
     public void demanaUsuari(){
-        accioDelTextField accioText = new accioDelTextField(this);
-
         this.setLayout(new FlowLayout(FlowLayout.LEFT,5 ,5));
         JLabel etiquetaUsu = new JLabel("Introdueix el nom de l'usuari: ");
         this.add(etiquetaUsu);
@@ -36,7 +31,8 @@ public class mainAplicacioGrafica extends JFrame {
 
         JTextField ompleUsuari = new JTextField("el teu nom...      ", 15);
         ompleUsuari.setForeground(Color.LIGHT_GRAY);
-        ompleUsuari.addActionListener(accioText);
+        //accioDelTextField accioText = new accioDelTextField();
+        //ompleUsuari.addActionListener(accioText);
         this.add(ompleUsuari);
     }  
         

@@ -8,14 +8,14 @@ public class Usuari implements Serializable {
     private String correu;
     private String codiPostal;
     private int numeroIntercanvis;
-    private llistaProductes llistaProd;  
+    private Producte[] arrayProd; 
     
     public Usuari (String alies, String correu, String codiPos){
         this.alies = alies;
         this.correu = correu;
         codiPostal = codiPos;
         numeroIntercanvis = 0;
-        llistaProd = new llistaProductes(100);  //Llista de productes per guardar els de cada usuari
+        arrayProd = new Producte[50];
     }
 
 
@@ -63,13 +63,23 @@ public class Usuari implements Serializable {
         Usuari aux;
         aux = new Usuari(alies, correu, codiPostal);
         aux.numeroIntercanvis = 0;
+        aux.arrayProd = null;
         return (aux);
     }
 
     @Override
     public String toString() {
         return "Usuaris [alies=" + alies + ", correu=" + correu + ", codiPostal=" + codiPostal + ", numeroIntercanvis="
-                + numeroIntercanvis + " ]";
+                + numeroIntercanvis + "]";
+    }
+
+    public Producte[] getArrayProd() {
+        return arrayProd;
+    }
+
+
+    public void setArrayProd(Producte[] arrayProd) {
+        this.arrayProd = arrayProd;
     }
 
 }

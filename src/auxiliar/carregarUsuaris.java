@@ -33,11 +33,6 @@ public class carregarUsuaris {
         } catch (FileNotFoundException e){
             System.out.println("Fitxer no trobat!");
         }
-        
-
-        
-        
-        
         return llistaAux;
     }
 }

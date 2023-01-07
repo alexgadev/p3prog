@@ -44,21 +44,13 @@ public class llistaUsuaris {
         return igual;
     }
 
-    /*public llistaUsuaris valoracioUsuaris(int llindar, Peticio pet){
-        llistaUsuaris llistaAux= new llistaUsuaris(nUsuaris);
-        for(int i = 0; i < nUsuaris; i++){
-           if (pet.getValoracioOfereix() > llindar || pet.getValoracioRep() > llindar){
-                llistaAux.afegirUsuari(llistaUsuaris[i]);
-            } 
-        }
-        return llistaAux;
-    }*/
     /**
      * Procediment que retorna una llista auxiliar amb els usuaris que superin el llindar. 
      * @param llindar llindar que l'usuari indica per paràmetre 
      * @param pet petició 
      * @return
      */
+    /* 
     public llistaUsuaris valoUsuaris (int llindar, Peticio pet){
         Usuari aux =new Usuari(null, null, null); 
         llistaUsuaris llistaAux= new llistaUsuaris(nUsuaris);
@@ -73,9 +65,8 @@ public class llistaUsuaris {
             }
         }
         return llistaAux;
-
     }
-
+*/
     public String toString(){
         String text = "";
         for (int i = 0; i < nUsuaris; i++){
@@ -116,6 +107,28 @@ public class llistaUsuaris {
     public Usuari getIessim(int i){
         Usuari aux = llistaUsuaris[i].copia();
         return aux;
+    }
+
+    public boolean comprovaUsuari(String alies){
+        boolean trobat = false;
+        int i = 0;
+        while(i<nUsuaris && !trobat){
+            if(llistaUsuaris[i].getAlies().equalsIgnoreCase(alies)){
+                trobat = true;
+            }
+            i++;
+        }
+        return trobat;
+    }
+
+    public int getPosicioUsuari(String alies, llistaUsuaris llistaUsu){
+        int pos = 0;
+        for (int i = 0; i<nUsuaris; i++){
+            if(alies.equals(llistaUsu.getIessim(i).getAlies())){
+                pos = i;
+            }
+        }
+        return pos;
     }
     
 }
