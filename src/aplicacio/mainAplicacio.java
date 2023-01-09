@@ -65,11 +65,16 @@ public class mainAplicacio {
                     String codiPos = llistaUsers.getIessim(posUsuari).getCodiPostal();
                     Usuari usu = new Usuari(alies, correu, codiPos);
                     System.out.println("A continuació, tria una opció");
-                    mostraOpcions();
-                    int opcio = teclat2.nextInt();
-                    triaOpcio(opcio, llistaPet, llistaProd, llistaUsers, usu);
+                    do{
+                        
+                        mostraOpcions();
+                        int opcio = teclat2.nextInt();
+                        triaOpcio(opcio, llistaPet, llistaProd, llistaUsers, usu);
+
+                    }while(!correcte);
+                    
                     teclat2.close();
-                    correcte = true;
+                    //correcte = true;
                 }
             } else if (valor == 3){
                 correcte = true;
@@ -115,20 +120,20 @@ public class mainAplicacio {
         
                     //5. Afegir una nova oferta de serveis
                     case 5:
-                    registraServei();
+                    registraServei(user);
                     correcte = true;
                     break;
         
                     //6. Afegir un nou bé o producte físic a intercanviar.
                     case 6: 
-                    registraBe();
+                    registraBe(user);
                     correcte = true;
                     break;
         
                     //7. Afegir una nova petició d’intercanvi.
-                    //TODO falta hacer este metodo
                     case 7: 
-                    
+                    registraPeticio(user, llistaUsu, llistaProd, llistaPet);
+                    correcte = true;
                     break;
         
                     //8. Acceptar o refusar una petició d’intercanvi. Si s’accepta, s’ha d’afegir la valoració de les dues parts.
@@ -138,12 +143,13 @@ public class mainAplicacio {
                     break;
         
                     //9. Donar d’alta un nou usuari.
+                    //TODO hacer procedimiento
                     case 9: 
                     
                     break;
                     
                     /*10. Donar de baixa un bé o producte físic a intercanviar i eliminar-lo de la llista. Només es podrà
-                    de donar de baixa si encara no s’ha fet cap intercanvi amb ell.*/
+                          de donar de baixa si encara no s’ha fet cap intercanvi amb ell.*/
                     case 10: 
                     llistaProd.eliminaProducteFisic(eliminaProducte());
                     correcte = true;
@@ -175,8 +181,9 @@ public class mainAplicacio {
         
                     //15. Mostrar els usuaris que tenen valoracions en els seus intercanvis superiors a un llindar que indiqui l’usuari.
                     case 15: 
-                    //TODO arreglar procedimiento valoracioUsuaris
-                    //llistaUsu.valoUsuaris(opcio, null)
+                    System.out.println("Escriu el llindar si us plau");
+                    int llindar = Integer.parseInt(teclat.nextLine());
+                    System.out.println(llistaUsu.valoUsuaris(llindar, llistaPet).toString());
                     break;
         
                     //16. Mostrar el servei del qual s’han fet més intercanvis i indicar el número d’aquests.
@@ -192,6 +199,43 @@ public class mainAplicacio {
                 }
             }
         return correcte;
+    }
+
+    private static void registraPeticio(Usuari user, llistaUsuaris llistaUsu, llistaProductes llistaProd, llistaPeticions llistaPet) {
+        String codi, resp1, resp2;
+        Usuari usuariRep;
+        Be beOf = null, beRep = null;
+        Servei servOf = null, servRep = null;
+        Peticio pet;
+
+        System.out.println("Indica el codi de la petició a afegir: ");
+        codi = teclat.nextLine();
+        usuariRep = llistaUsu.buscaUsuariDest(llistaUsu);
+        System.out.println("El producte a intercanviar és un be o un servei?");
+        resp1 = teclat.nextLine();
+        if(resp1.equalsIgnoreCase("servei")){
+            servOf = llistaProd.buscaServei(user ,llistaProd);
+        } else {
+            beOf = llistaProd.buscaBe(user, llistaProd);
+        }
+        System.out.println("El producte que es rep és un be o un servei?");
+        resp2 = teclat.nextLine();
+        if(resp2.equalsIgnoreCase("servei")){
+            servRep = llistaProd.buscaServei(user ,llistaProd);
+            
+        } else {
+            beRep = llistaProd.buscaBe(user, llistaProd);
+        }
+        if(resp1.equalsIgnoreCase("servei") && resp2.equalsIgnoreCase("be")){
+            pet = new Peticio(codi, user, usuariRep, servOf, beRep);
+        } else if(resp1.equalsIgnoreCase("servei") && resp2.equalsIgnoreCase("servei")){
+            pet = new Peticio(codi, user, usuariRep, servOf, servRep);
+        } else if(resp1.equalsIgnoreCase("be") && resp2.equalsIgnoreCase("servei")){
+            pet = new Peticio(codi, user, usuariRep, beOf, servRep);
+        } else {
+            pet = new Peticio(codi, user, usuariRep, beOf, beRep);
+        }
+        llistaPet.afegeixPeticio(pet);
     }
 
     private static Servei desactivaServei() {
@@ -483,7 +527,7 @@ public class mainAplicacio {
         return llistaUsu; 
     } 
 
-    public static void registraServei(){
+    public static void registraServei(Usuari user){
         Servei serv;
         String nom, desc, dat, opcio;
         String[] dataSplit;
@@ -510,9 +554,10 @@ public class mainAplicacio {
             serv = new Servei(nom, desc, data);
         }
         llistaProd.afegeixBe(serv);
+        user.afegeixProducteUsu(serv);
     }
 
-    public static void registraBe(){
+    public static void registraBe(Usuari user){
         Be be;
         String nom, desc, dat;
         String[] dataSplit;
@@ -538,6 +583,7 @@ public class mainAplicacio {
         pes = teclat.nextInt();
         be = new Be(nom, desc, data, ampl, alça, fons, pes);
         llistaProd.afegeixBe(be);
+        user.afegeixProducteUsu(be);
         
     }
 }

@@ -10,11 +10,11 @@ import dades.Usuari;
 import dades.llistaUsuaris;
 
 public class carregarUsuaris {
-    public llistaUsuaris carregarUsu() throws IOException {
-        llistaUsuaris llistaAux = new llistaUsuaris(100);
-        boolean finalFitxer = false;
+    public llistaUsuaris carregarUsu() {
         ObjectInputStream fitxerBinari;
         Usuari usu;
+        llistaUsuaris llistaAux = new llistaUsuaris(100);
+        boolean finalFitxer = false;
         
         try{
             fitxerBinari = new ObjectInputStream(new FileInputStream("Usuaris.bin"));
@@ -24,6 +24,7 @@ public class carregarUsuaris {
                     usu = (Usuari)fitxerBinari.readObject();
                     llistaAux.afegirUsuari(usu);
                 }
+                fitxerBinari.close();
 
             } catch(EOFException e){
                 finalFitxer = true;
@@ -32,6 +33,9 @@ public class carregarUsuaris {
             }
         } catch (FileNotFoundException e){
             System.out.println("Fitxer no trobat!");
+        } catch (IOException e){
+            System.err.println(e);
+            e.printStackTrace();
         }
         return llistaAux;
     }

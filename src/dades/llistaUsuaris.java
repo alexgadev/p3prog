@@ -3,8 +3,10 @@ package dades;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.Scanner;
 
 public class llistaUsuaris {
+    Scanner teclat = new Scanner(System.in);
     private int nUsuaris;
     private Usuari[] llistaUsuaris;
 
@@ -50,23 +52,22 @@ public class llistaUsuaris {
      * @param pet petició 
      * @return
      */
-    /* 
-    public llistaUsuaris valoUsuaris (int llindar, Peticio pet){
+    
+    public llistaUsuaris valoUsuaris (int llindar, llistaPeticions llistaPet){
         Usuari aux =new Usuari(null, null, null); 
         llistaUsuaris llistaAux= new llistaUsuaris(nUsuaris);
         for(int i = 0; i < nUsuaris; i++){
-           if (pet.getValoracioOfereix() > llindar){
-                aux = pet.getUsuariOfereix();
+           if (llistaPet.getIessim(i).getValoracioOfereix() > llindar){
+                aux = llistaPet.getIessimUsuari(i).copia();
                 llistaAux.afegirUsuari(aux);
             }
-            if (pet.getValoracioRep() > llindar){
-                aux = pet.getUsuariRep();
+            if (llistaPet.getIessim(i).getValoracioRep() > llindar){
+                aux = llistaPet.getIessimUsuari(i).copia();
                 llistaAux.afegirUsuari(aux);
             }
         }
         return llistaAux;
     }
-*/
     public String toString(){
         String text = "";
         for (int i = 0; i < nUsuaris; i++){
@@ -86,6 +87,24 @@ public class llistaUsuaris {
         } catch (IOException e){
             System.out.println("Error en l'arxiu de sortida!");
         }
+    }
+
+    public Usuari buscaUsuariDest(llistaUsuaris llistaUsu){
+        Usuari usuAux = null;
+        boolean trobat = false;
+        int i = 0;
+        String usuariDest;
+        
+        System.out.println("Quin usuari es el destinatari?");
+        usuariDest = teclat.nextLine();
+        while(!trobat){
+            if(llistaUsu.getIessim(i).getAlies().equalsIgnoreCase(usuariDest)){
+                usuAux = ((Usuari)llistaUsu.getIessim(i)).copia();
+                trobat = true;
+            }
+            i++;
+        }
+        return usuAux;
     }
 
     public int getnUsuaris() {

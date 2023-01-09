@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class Be extends Producte {
 
-    protected int amplada, alçada, fons, pes;
-    protected Date dataIntercanvi;
+    protected int amplada, alçada, fons, pes;       //Volum del bé
+    protected Date dataIntercanvi;              //Data en que s'ha intercanviat el bé
 
     public Be(String nom, String desc, Data data, int amplada, int alçada, int fons, int pes){
         super(nom, desc, data);
@@ -13,7 +13,7 @@ public class Be extends Producte {
         this.alçada = alçada;
         this.fons = fons;
         this.pes = pes;
-        dataIntercanvi = null;
+        dataIntercanvi = null;          //Inicialment suposem que el bé no ha estat intercanviat encara
     }
 
     public int getAmplada() {
@@ -58,6 +58,7 @@ public class Be extends Producte {
 
     public Be copia (){
         Be aux = new Be(getNomProd(), getDescripcio(), getDataOferta(), amplada, alçada, fons, pes);
+        aux.dataIntercanvi = this.dataIntercanvi;           //Copiem la data d'intercanvi del bé a copiar
         return aux;
     }
 

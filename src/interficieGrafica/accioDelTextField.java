@@ -1,4 +1,4 @@
-package interficieGrafica;
+package interficiegrafica;
 
 import aplicacio.mainAplicacioGrafica;
 import javax.swing.*;
@@ -11,7 +11,6 @@ public class accioDelTextField implements ActionListener {
     public accioDelTextField(mainAplicacioGrafica mGrafica) {
         this.mGrafica = mGrafica;
     }
-
     
     public void actionPerformed(ActionEvent evt) {
        JTextField tf = (JTextField) evt.getSource(); //Obtenim referencia del control que ha fet l'element
@@ -21,6 +20,5 @@ public class accioDelTextField implements ActionListener {
 
        //Enviem el text al TextArea
        tf.setText("");
-        
     }
 }

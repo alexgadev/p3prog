@@ -4,24 +4,29 @@ import java.util.Scanner;
 
 public class llistaPeticions {
     
-    private int nPeticions;
-    private Peticio[] llistaPeticio;
+    private int nPeticions;         //Numero de peticions fetes
+    private Peticio[] llistaPeticio;            //Llista de les peticions que s'han dut a terme
 
 
     public llistaPeticions(int mida) {
         llistaPeticio = new Peticio[mida];
-        nPeticions = 0;
+        nPeticions = 0;             //Inicialment suposem que no hi ha cap petició a la llista
     }
 
     public Peticio getIessim(int i) {
-        Peticio aux = llistaPeticio[i].copia();
+        Peticio aux = llistaPeticio[i].copia();         //Retornem una copia de la petició a la posició "i" de la llista
+        return aux;
+    }
+
+    public Usuari getIessimUsuari(int i){
+        Usuari aux = llistaPeticio[i].getUsuariOfereix();           //Retornem l'usuari que ha iniciat la petició de la posició "i" de la llista
         return aux;
     }
 
     public void afegeixPeticio(Peticio pe){
-        if(nPeticions < llistaPeticio.length){
-            llistaPeticio[nPeticions] = pe.copia();
-            nPeticions++;
+        if(nPeticions < llistaPeticio.length){          //Si hi ha espai a la llista de peticions (definida al construir la llista)...
+            llistaPeticio[nPeticions] = pe.copia();         //afegim una copia d'aquesta petició a la llista
+            nPeticions++;           //Actualitzem el numero de peticions que tenima  al llista
         }
     }
 
@@ -71,18 +76,6 @@ public class llistaPeticions {
             teclat.close();
         } 
     }
-
-    //TODO hacer aqui el valoraUsuaris
-    /*
-    public llistaUsuaris valoUsuaris(int llindar){
-        llistaUsuaris llistaUsuAux = new llistaUsuaris(100);
-
-        for(int i = 0; i < llistaUsuAux.getnUsuaris(); i++){
-            if(llistaPeticio[i])
-        }
-
-        return llistaUsuAux;
-    } */
     
     public String toString(){
         String text = "";

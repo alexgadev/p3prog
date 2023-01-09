@@ -16,7 +16,7 @@ public class Data {
     }
 
     public String toString() {
-		return(dia+"/"+mes+"/"+any);
+		return(dia+"/"+mes+"/"+any);        //la data té format dd/mm/aaa
 	}
 
 	public Data copia() {

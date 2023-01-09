@@ -3,14 +3,14 @@ package dades;
 import java.util.Scanner;
 
 public class Peticio {
-    private String codi;
-    private Usuari usuariOfereix;
-    private Usuari usuariRep;
-    private Producte desitjat;
-    private Producte oferit;
-    private int resposta;
-    private int valoracioOfereix;
-    private int valoracioRep;
+    private String codi;            //Codi de la peticio  
+    private Usuari usuariOfereix;           //El usuari que ofereix l'intercanvi
+    private Usuari usuariRep;           //El usuari que rep l'intercanvi
+    private Producte desitjat;          //El producte que intercanvia l'usuari que rep l'intercanvi
+    private Producte oferit;            //El producte que intercanvia l'usuari que ofereix l'intercanvi
+    private int resposta;           //Guarda la resposta de la peticio
+    private int valoracioOfereix;           //La valoracio de l'intercanvi que s'ofereix
+    private int valoracioRep;           //La valoracio de l'intercanvi que es rep
 
     public Peticio(String codi, Usuari usuariOfereix, Usuari usuariRep, Producte desitjat, Producte oferit) {
         this.codi = codi;
@@ -18,9 +18,9 @@ public class Peticio {
         this.usuariRep = usuariRep;
         this.desitjat = desitjat;
         this.oferit = oferit;
-        resposta = 0;
-        valoracioOfereix = 0;
-        valoracioRep = 0;
+        resposta = 0;           //Inicialitzem a 0 la resposta ja que sera una peticio no resposta           
+        valoracioOfereix = 0;   //Inicialitzem la valoracio de l'intercanvi que s'ofereix a 0
+        valoracioRep = 0;           //Inicialitzem la valoracio de l'intercanvi que es rep a 0
     }
 
     public String getCodi() {

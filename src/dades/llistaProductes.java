@@ -3,7 +3,7 @@ package dades;
 import java.util.Scanner;
 
 public class llistaProductes {
-
+    Scanner teclat = new Scanner(System.in);
     private int nProductes;
     private Producte[] llistaProd;
 
@@ -68,6 +68,7 @@ public class llistaProductes {
             if ((llistaProd[i] instanceof Servei) && llistaProd[i].getDataOferta().equals(dataFiServei) 
                 && llistaProd[i].getNomProd().equals(nom) && llistaProd[i].getDescripcio().equals(desc)){
                 ((Servei)llistaProd[i]).dataFiOferiment = dataFiServei;
+                ((Servei)llistaProd[i]).donatDeBaixa = true;
             }
         }
     }
@@ -113,17 +114,17 @@ public class llistaProductes {
         return text;
     }
 
+
     public llistaProductes serveisActius(){
         llistaProductes aux = new llistaProductes(nProductes);
         for(int i = 0; i<nProductes; i++){
-            if((llistaProd[i] instanceof Servei) && ((Servei)llistaProd[i]).dataFiOferiment == null){
+            if((llistaProd[i] instanceof Servei) && ((Servei)llistaProd[i]).donatDeBaixa == false){
                 aux.afegeixServei(llistaProd[i]);
             }
         }
         return aux;
     }
 
-    //TODO revisar este metodo ya que si esta intercambiado puede seguir intercambiandose
     public llistaProductes bensActius() {
         llistaProductes aux = new llistaProductes(nProductes);
         for(int i = 0; i < nProductes; i++) {
@@ -132,6 +133,46 @@ public class llistaProductes {
             }
         }
         return aux;
+    }
+
+    public Servei buscaServei(Usuari usu, llistaProductes llistaProd){
+        boolean trobat = false;
+        String resp;
+        int i = 0;
+        Servei serv = null;
+
+        System.out.println("Indica el nom del servei: ");
+        resp = teclat.nextLine();
+        if(usu.pertanyProducte(usu, resp)){
+            while(!trobat){
+                if(llistaProd.getIessim(i).getNomProd().equalsIgnoreCase(resp)){
+                    trobat = true;
+                    serv = ((Servei)llistaProd.getIessimServei(i));
+                }
+                i++;
+            }
+        }
+        return serv;
+    }
+
+    public Be buscaBe(Usuari usu, llistaProductes llistaProd){
+        Be be = null;
+        int i = 0;
+        String resp;
+        boolean trobat = false;
+
+        System.out.println("Indica el nom del be: ");
+        resp = teclat.nextLine();
+        if(usu.pertanyProducte(usu, resp)){
+            while(!trobat){
+                if(llistaProd.getIessim(i).getNomProd().equalsIgnoreCase(resp)){
+                    trobat = true;
+                    be = ((Be)llistaProd.getIessimBe(i));
+                }
+                i++;
+            }
+        }
+        return be;
     }
 
     public int getnProductes() {

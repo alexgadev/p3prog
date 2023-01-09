@@ -3,24 +3,24 @@ package dades;
 
 public abstract class Producte {
     
-    private String nomProd;
-    private String descripcio;;
-    private Data dataOferta;
-    private boolean intercanviat;
-    protected int comptadorInter;
+    private String nomProd;             //Nom del producte
+    private String descripcio;          //Descripció del producte 
+    private Data dataOferta;            //Data en la que s'ha ofertat el producte
+    private boolean intercanviat;       //Variable per saber si el producte ha estat intercanviat
+    protected int comptadorInter;       //comptador per a tenir un seguiment dels cops que s'ha intercanviat un producte
 
     public Producte(String nom, String desc, Data data){
         nomProd = nom;
         descripcio = desc;
         dataOferta = data;
-        intercanviat = false;
-        comptadorInter = 0;
+        intercanviat = false;           //Inicialment suposem que el producte no ha estat intercanviat
+        comptadorInter = 0;             //Inicialment suposem que el producte no ha estat intercanviat CAP cop
     }
 
     public void modificaDescripcio(String desc){
-        if(descripcio.equals(desc)){
+        if(descripcio.equals(desc)){            //Si la descripció nova és la mateixa que la vella, aquesta no es pot actualitzar
             System.out.println("Descripció no vàlida");
-        } else {
+        } else {        //En cas contrari, actualitzem la descripcio
             descripcio = desc;
         }
     }
