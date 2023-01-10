@@ -9,7 +9,7 @@ public class CrearArxiuBinari {
         ObjectOutputStream fitxerBinari = new ObjectOutputStream(new FileOutputStream("Usuaris.bin"));
 
         for(int i = 0; i < llistaUsers.getnUsuaris(); i++){
-           fitxerBinari.writeObject(llistaUsers.getIessim(i)); 
+           fitxerBinari.writeObject(llistaUsers.getIessim(i));
         }
         fitxerBinari.close();
     }

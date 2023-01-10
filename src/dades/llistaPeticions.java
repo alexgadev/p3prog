@@ -60,19 +60,20 @@ public class llistaPeticions {
         return llistaAux;
     }
 
-    public void respostaPeticio(Peticio pet, Producte serv){
+    public void respostaPeticio(llistaPeticions llistaPet, int pos){
         Scanner teclat = new Scanner(System.in);
         int val;
 
-        if(pet.getResposta() == 1){
-            serv.comptadorInter++;
+        if(llistaPet.getIessim(pos).getResposta() == 1){
+            //serv.comptadorInter++;
+            //llistaPet.g
             System.out.println("Introdueix la valoració del venedor: ");
             val = teclat.nextInt();
-            pet.setValoracioOfereix(val);
+            //pet.setValoracioOfereix(val);
             
             System.out.println("Introdueix la valoració del comprador: ");
             val = teclat.nextInt();
-            pet.setValoracioRep(val);
+            //pet.setValoracioRep(val);
             teclat.close();
         } 
     }

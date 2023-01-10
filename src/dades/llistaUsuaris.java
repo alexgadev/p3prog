@@ -89,6 +89,7 @@ public class llistaUsuaris {
         }
     }
 
+
     public Usuari buscaUsuariDest(llistaUsuaris llistaUsu){
         Usuari usuAux = null;
         boolean trobat = false;

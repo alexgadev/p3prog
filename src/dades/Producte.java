@@ -70,7 +70,7 @@ public abstract class Producte {
     @Override
     public String toString() {
         return "Producte [nomProd=" + nomProd + ", descripcio=" + descripcio + ", dataOferta=" + dataOferta
-                + ", intercanviat=" + intercanviat + ", comptadorInter=" + comptadorInter + "]";
+                + ", intercanviat=" + intercanviat + ", comptadorInter=" + comptadorInter + " és un";
     }
     
 }

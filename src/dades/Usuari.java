@@ -20,11 +20,12 @@ public class Usuari implements Serializable {
     }
 
     //Mètode que afegeix un producte a un usuari en específic
-    public void afegeixProducteUsu(Producte prod){
+    public Producte afegeixProducteUsu(Producte prod){
         if(numProdUsuari < arrayProd.length){           //Si hi ha espai a la llista de productes que té l'usuari (l'usuari té menys de 50 productes)...
             arrayProd[numProdUsuari] = prod.copia();    //...afegim el producte a la llista
             numProdUsuari++;            //Indiquem que l'usuari té un producte més a la seva disposició
         }
+        return prod.copia();
     }
 
     public boolean pertanyProducte(Usuari usu, String producte){
@@ -96,6 +97,7 @@ public class Usuari implements Serializable {
         this.arrayProd = arrayProd;
     }
 
+
     public int getNumProdUsuari() {
         return numProdUsuari;
     }
@@ -103,6 +105,7 @@ public class Usuari implements Serializable {
     public void setNumProdUsuari(int numProdUsuari) {
         this.numProdUsuari = numProdUsuari;
     }
+
 
     @Override
     public String toString() {

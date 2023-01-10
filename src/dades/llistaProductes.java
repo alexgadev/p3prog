@@ -8,7 +8,7 @@ public class llistaProductes {
     private Producte[] llistaProd;
 
     public llistaProductes(int mida) {
-        llistaProd = new Producte[mida];
+        llistaProd = new Producte[100];
         nProductes = 0;
     }
     
@@ -20,9 +20,14 @@ public class llistaProductes {
     }
     
     public void afegeixBe(Producte prod){
-        if(nProductes < llistaProd.length){
+        if(nProductes == 0){
             llistaProd[nProductes] = ((Be)prod).copia();
             nProductes++;
+        } else {
+            if(nProductes < llistaProd.length){
+                llistaProd[nProductes] = ((Be)prod).copia(); //TODO volver aqui sino
+                nProductes++;
+            }
         }
     }
 

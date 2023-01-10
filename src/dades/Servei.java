@@ -42,5 +42,10 @@ public class Servei extends Producte {
         aux.setDonatDeBaixa(this.donatDeBaixa);             //Si el producte copiat està donat de baixa o d'alta, també ho copiem
         return aux;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + "Servei [dataFiOferiment=" + dataFiOferiment + ", donatDeBaixa=" + donatDeBaixa + " és un";
+    }
     
 }

@@ -64,7 +64,7 @@ public class Be extends Producte {
 
     @Override
     public String toString() {
-        return "Be [amplada=" + amplada + ", alçada=" + alçada + ", fons=" + fons + ", pes=" + pes + ", dataIntercanvi="
+        return super.toString() + " Be [amplada=" + amplada + ", alçada=" + alçada + ", fons=" + fons + ", pes=" + pes + ", dataIntercanvi="
                 + dataIntercanvi + "]";
     }
 

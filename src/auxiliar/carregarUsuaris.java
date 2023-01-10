@@ -19,7 +19,6 @@ public class carregarUsuaris {
         try{
             fitxerBinari = new ObjectInputStream(new FileInputStream("Usuaris.bin"));
             try{
-
                 while(!finalFitxer){
                     usu = (Usuari)fitxerBinari.readObject();
                     llistaAux.afegirUsuari(usu);
@@ -35,7 +34,6 @@ public class carregarUsuaris {
             System.out.println("Fitxer no trobat!");
         } catch (IOException e){
             System.err.println(e);
-            e.printStackTrace();
         }
         return llistaAux;
     }
